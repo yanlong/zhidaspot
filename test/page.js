@@ -86,11 +86,9 @@ define(function(require) {
 
     App.prototype.init = function() {
         var self = this;
-        var winHeight = $(window).height();
         var duration = 300;
         window.onhashchange = function(e) {
-            var url = location.href;
-            var hash = url.lastIndexOf('#') !== -1 ? url.substr(url.lastIndexOf('#')) : null;
+            var hash = App.hash();
             var pages = self.pages;
             if (!hash || !pages[hash]) {
                 // hide current
@@ -104,6 +102,12 @@ define(function(require) {
             }
         }
         $(window).trigger('hashchange');
+    }
+
+    App.hash = function (url) {
+        url = url || location.href;
+        var hash = url.lastIndexOf('#') !== -1 ? url.substr(url.lastIndexOf('#')+1) : '';
+        return hash;
     }
 
     return App;
