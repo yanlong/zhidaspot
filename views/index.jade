@@ -2,4 +2,46 @@ extends layout
 
 block content
   h1= title
-  p Welcome to #{title}
+  style.
+    body {
+        /*background-color: black;*/
+    }
+    .page {
+        top: 100px;
+        bottom: 0px;
+        left: 0px;
+        right: 0px;
+        display: none;
+        position: fixed;
+    }
+
+    #a {
+        background-color: red;
+    }
+    #b {
+        background-color: blue;
+    }
+    #c {
+        background-color: yellow;
+    }
+  
+  a(href='#/a')
+    导航1
+  a(href='#/b')
+    导航2
+  a(href='#/c')
+    导航3
+  script.
+    var require = {
+    baseUrl: 'js',
+    paths: {
+    },
+    shim: {
+    },
+    map: {
+    '*': 'FIS_MAP_JSON',
+    }
+    }
+  script(src='http://apps.bdimg.com/libs/zepto/1.1.4/zepto.min.js')
+  script(src='http://apps.bdimg.com/libs/require.js/2.1.11/require.min.js')
+  script(src='/js/app.js')
