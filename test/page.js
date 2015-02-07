@@ -10,8 +10,8 @@ define(function(require) {
         this.showAnimation(duration);
     }
 
-    Page.prototype.hide = function() {
-        this.hideAnimation();
+    Page.prototype.hide = function(duration) {
+        this.hideAnimation(duration);
     }
 
     Page.prototype.handleShowComplete = function() {
@@ -48,7 +48,7 @@ define(function(require) {
         setTimeout($.proxy(this.handleShowComplete, this), duration)
     };
 
-    Page.prototype.hideAnimation = function() {
+    Page.prototype.hideAnimation = function(duration) {
         var n = $(window).width();
         this.$el.css({
             "-webkit-transform": "none",
@@ -87,20 +87,18 @@ define(function(require) {
     App.prototype.init = function() {
         var self = this;
         var winHeight = $(window).height();
+        var duration = 300;
         window.onhashchange = function(e) {
             var url = location.href;
             var hash = url.lastIndexOf('#') !== -1 ? url.substr(url.lastIndexOf('#')) : null;
             var pages = self.pages;
             if (!hash || !pages[hash]) {
                 // hide current
-                self.visitedIndex = true;
-                self.current && self.current.hide();
+                self.current && self.current.hide(duration);
                 self.current = null;
             } else {
                 // hide current 
-                var duration = self.visitedIndex ? 300 : 0;
-                duration = 300;
-                self.current && self.current.hide();
+                self.current && self.current.hide(duration);
                 pages[hash].show(duration); // show targe
                 self.current = pages[hash];
             }
