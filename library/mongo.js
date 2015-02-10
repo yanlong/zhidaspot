@@ -1,33 +1,27 @@
 var print = console.log
 var mongoose = require('mongoose');
 var db = mongoose.connection;
+var models = require('./models');
 db.on('error', console.log.bind(console, 'connection error:'));
 db.once('open', function(callback) {
     // yay!
 });
 console.log('ffff')
-mongoose.connect('mongodb://10.48.222.106:8301/xxx');
-var CatSchema = mongoose.Schema({
-    name: String,
-    age: Number,
-});
-CatSchema.methods.speak = function() {
-    console.log(this.name);
-}
-var Cat = mongoose.model('Cat', CatSchema);
 
-var kitty = new Cat({
+var kitty = new models.App({
     name: 'Zildjian',
     // age: 1,
 });
 kitty.speak();
+mongoose.connect('mongodb://10.48.222.106:8301/xxx');
+
 kitty.save(function(err) {
     if (err) // ...
         console.log('meow');
     console.log('done')
 });
-print(Cat.find)
-Cat.find({
+
+models.App.find({
     name: 'Zildjian'
 }, {
     name: 1,
