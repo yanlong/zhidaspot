@@ -1,6 +1,7 @@
 var print = console.log
 var mongoose = require('mongoose');
 var db = mongoose.connection;
+var _ = require('underscore');
 var models = require('./models');
 var cb = function (callback) {
     return function (err) {
@@ -11,12 +12,14 @@ var cb = function (callback) {
         }
     }
 }
+
 db.on('error', console.log.bind(console, 'connection error:'));
 db.once('open', function(callback) {
     // yay!
 });
 mongoose.connect('mongodb://10.48.222.106:8301/xxx');
-console.log('ffff')
+console.log('#### begin')
+
 var news1 = new models.News({
     title: 'fuck',
 })
