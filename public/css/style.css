@@ -1,8 +1,84 @@
+html,body{
+  width: 100%;
+  height: 100%;
+}
 body {
-  padding: 20px;
+  color: #fff;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
-
-a {
+a{
   color: #00B7FF;
+}
+
+.page {
+    top: 100px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    display: none;
+    position: fixed;
+}
+
+#a {
+    background-color: red;
+}
+#b {
+    background-color: blue;
+}
+#c {
+    background-color: yellow;
+}
+
+/*main*/
+.x-page-bg, .x-page-bg img{
+    width: 100%;
+    height: 100%;
+}
+
+.x-page-index{
+  width: 100%;
+  height: 100%;
+}
+
+.x-cpt-menu1{
+  position: absolute;
+  display: block;
+  bottom: 0;
+  width: 100%;
+   background:-webkit-gradient(linear, 50% 0%, 50% 30%, from(rgba(0,0,0,0)), to(rgba(0,0,0,1)) );
+}
+.x-cpt-menu1 ul{
+  display: -webkit-box;
+  -webkit-box-ordinal-group: vertical;
+  border: 1px solid #292929;
+  border-top-width: 0px;
+}
+.x-cpt-menu1 ul li{
+  -webkit-box-flex: 1;
+  width: 30%;
+  /*height: 50px;*/
+  text-align: center;
+  border: 1px solid #292929;
+  border-width: 0 0 0 1px;
+}
+.x-cpt-menu1 ul:nth-child(1){
+  border-top-width: 1px;
+}
+.x-cpt-menu1 ul li:nth-child(1){
+  border-left-width: 0;
+}
+.x-cpt-menu1 ul li>a{
+  display: block;
+  color: #fff;
+  padding-top: 12px;
+  padding-bottom: 14px;
+}
+.x-cpt-menu1 span{
+  display: block;
+  line-height: 25px;
+  font-size: 14px;
+}
+.x-cpt-menu1 ul li>a span:nth-child(2){
+  color: #606060;
+  font-size: 13px;
 }
