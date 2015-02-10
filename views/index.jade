@@ -6,15 +6,7 @@ block content
         img(src="/img/demo-front.jpg", alt="")
     .x-theme-highlight
 
-    h1= title
-    a(href='#/a')
-      导航1
-    a(href='#/b')
-      导航2
-    a(href='#/c')
-      导航3
-
-    - var menu = [ {name:'公司简介',ename:'Company',url:'#/a'}, {name:'产品中心',ename:'Products'},{name:'促销信息',ename:'Promotion'},{name:'新闻中心',ename:'News'},{name:'招商加盟',ename:'Attracting'},{name:'联系我们',ename:'Contact us'}]
+    - var menu = [ {name:'公司简介',ename:'Company',url:'#/company'}, {name:'产品中心',ename:'Products',url:'#/b'},{name:'促销信息',ename:'Promotion',url:'#/c'},{name:'新闻中心',ename:'News'},{name:'招商加盟',ename:'Attracting'},{name:'联系我们',ename:'Contact us'}]
     - var menuSize = 3
     
     .x-cpt-menu1
@@ -22,7 +14,7 @@ block content
       ul
         each item,index in menu
           li
-            a(href=item.url)
+            a(class='x-jump' href=item.url)
               span= item.name
               span= item.ename
 

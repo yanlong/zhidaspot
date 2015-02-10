@@ -12,6 +12,11 @@ define(function() {
       $(clsname).css('background','rgba(0,0,0,.5)');
       !stop && $(clsname).css('display','none');
       fn && fn();
+    },
+    start: function(queue){
+      for(var i in queue){
+        queue[i]();
+      };
     }
   }
 });
