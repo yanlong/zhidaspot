@@ -1,47 +1,31 @@
 extends layout
 
 block content
-  h1= title
-  style.
-    body {
-        /*background-color: black;*/
-    }
-    .page {
-        top: 100px;
-        bottom: 0px;
-        left: 0px;
-        right: 0px;
-        display: none;
-        position: fixed;
-    }
+  .x-page-index
+    .x-page-bg
+        img(src="/img/demo-front.jpg", alt="")
+    .x-theme-highlight
 
-    #a {
-        background-color: red;
-    }
-    #b {
-        background-color: blue;
-    }
-    #c {
-        background-color: yellow;
-    }
-  
-  a(href='#/a')
-    导航1
-  a(href='#/b')
-    导航2
-  a(href='#/c')
-    导航3
-  script.
-    var require = {
-    baseUrl: 'js',
-    paths: {
-    },
-    shim: {
-    },
-    map: {
-    '*': 'FIS_MAP_JSON',
-    }
-    }
-  script(src='http://apps.bdimg.com/libs/zepto/1.1.4/zepto.min.js')
-  script(src='http://apps.bdimg.com/libs/require.js/2.1.11/require.min.js')
-  script(src='/js/app.js')
+    h1= title
+    a(href='#/a')
+      导航1
+    a(href='#/b')
+      导航2
+    a(href='#/c')
+      导航3
+
+    - var menu = [ {name:'公司简介',ename:'Company',url:'#/a'}, {name:'产品中心',ename:'Products'},{name:'促销信息',ename:'Promotion'},{name:'新闻中心',ename:'News'},{name:'招商加盟',ename:'Attracting'},{name:'联系我们',ename:'Contact us'}]
+    - var menuSize = 3
+    
+    .x-cpt-menu1
+
+      ul
+        each item,index in menu
+          li
+            a(href=item.url)
+              span= item.name
+              span= item.ename
+
+          if (index+1) != menu.length && (index+1)%menuSize == 0
+            != '</ul><ul>'
+      

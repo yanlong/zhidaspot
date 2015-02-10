@@ -1,5 +1,7 @@
-require(['page'],function(App) {
+require(['util','page'],function(util, App) {
     var app = new App();
+    app.init();
+
     $('a').each(function () {
         var hash = App.hash($(this).attr('href'));
         console.log(hash);
@@ -9,5 +11,12 @@ require(['page'],function(App) {
             app.get(hash, '#'+page)
         })
     });
-    app.init();
-})
+
+    util.loadingEnd(false, function(){
+        $('.x-cpt-menu1').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+            $('a', this).addClass('animated rubberBand');
+        });
+        $('.x-cpt-menu1').addClass('animated bounceInUp');
+    });
+
+});
