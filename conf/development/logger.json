@@ -1,0 +1,41 @@
+{
+  "appenders": [{
+    "type": "console",
+    "category": "logger"
+  }, {
+    "type": "file",
+    "filename": "./log/appcore.log",
+    "pattern": "-yyyy-MM-dd-hh",
+    "category": "logger"
+  }, {
+    "type": "console",
+    "category": "logger2"
+  }, {
+    "type": "file",
+    "filename": "./log/appcore.log.wf",
+    "pattern": "-yyyy-MM-dd-hh",
+    "category": "logger2"
+  }, {
+    "type": "file",
+    "filename": "./log/appcore.log.rig",
+    "category": "rig",
+    "layout": {
+      "type": "pattern",
+      "pattern": "%m"
+    }
+  }, {
+    "type": "console",
+    "filename": "./log/appcore.log.rig",
+    "category": "rig",
+    "layout": {
+      "type": "pattern",
+      "pattern": "%m"
+    }
+  }],
+  "replaceConsole": false,
+  "levels": {
+    "logger": "trace",
+    "logger2": "warn",
+    "rig": "trace"
+  }
+}

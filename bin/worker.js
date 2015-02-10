@@ -88,3 +88,33 @@ function onListening() {
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
 }
+
+
+// Cluster
+var cluster = require('cluster');
+process.once('uncaughtException', function(e) {
+  logger.fatal(e);
+  if (cluster.isWorker) {
+    cluster.worker.send({
+      action: 'suicide'
+    });
+  }
+  stop();
+})
+
+process.on('message', function(msg) {
+  switch (msg) {
+    case 'stop':
+      stop();
+      break;
+  }
+})
+
+function stop() {
+  server.close(function() {
+    process.exit(1);
+  })
+  setTimeout(function() {
+    process.exit(1);
+  }, 3000);
+}

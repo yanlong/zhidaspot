@@ -1,0 +1,16 @@
+{
+    "plugHostMap": {},
+    "light": {
+        "api": {
+
+        },
+        "host": "http://db-testing-wisetf103.db01.baidu.com:8008"
+    },
+    "runtime": {
+        "host": "cq01-rdqa-dev050.cq01.baidu.com:8556"
+    },
+    "comptruntime": {
+        "host": "cq01-rdqa-dev050.cq01.baidu.com:8568"
+    },
+    "loggerConfigFile": "conf/development/logger.json"
+}

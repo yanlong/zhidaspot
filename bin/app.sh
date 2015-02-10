@@ -40,8 +40,8 @@ export NODE_PATH=$DIR/node_modules
 #cd $OLDPATH
 cd $(dirname $DIR)
 
-APP='app.js'
-APP='bin/www'
+# APP='app.js'
+APP='bin/master.js'
 if [ ! -f $APP ];then
     echo "App '$APP' is not present."
     exit 1

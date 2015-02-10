@@ -1,0 +1,11 @@
+{
+	"host": "http://tc-mongodb-cc00.tc.baidu.com:8587",
+	"headers": {
+		"Host": "pss-pim.pcs.baidu.com"
+	},
+	"baseUri": "/rest/2.0/structure/",
+	"ak": "ecVFYtml9L8EeXY55pApaVux",
+	"sk": "2FYZ0kcV3AxgF30SxjjFDFb045lBGUlN",
+	"admin": "962535289",
+	"appId": "1534248"
+}

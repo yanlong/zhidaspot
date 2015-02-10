@@ -1,0 +1,35 @@
+{
+	"host": "legoappcore.duapp.com",
+	"light": {
+		"api": {
+			"host": "http://lightapi.duapp.com"
+		},
+		"host": "http://lightapp.duapp.com"
+	},
+	"tables": {
+		"app": "appInfo13",
+		"page": "pageInfo13",
+		"plug": "plugInfo13",
+		"class": "cpl1_classInfo",
+		"post": "cpl1_postInfo"
+	},
+	"plugHostMap": {},
+	"runtime": {
+		"host": "rt.lego.appbuilder.baidu.com"
+	},
+	"comptruntime": {
+		"host": "bj.runtime.lightapp.baidu.com"
+	},
+	"workers": 4,
+	"timeout": {
+		"pss": 10000,
+		"plug": 10000
+	},
+	"maxSockets": 500,
+	"loggerConfigFile": "conf/production/logger.json",
+	"errorPage": "http://m.baidu.com/error.jsp",
+	"useSmarttag": true,
+	"usePssStub": false,
+	"recordPssQuery": false,
+	"isProfiling": false
+}
