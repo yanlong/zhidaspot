@@ -24,12 +24,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 app.use('/', routes);
+app.use('/', require('./routes/app.js'));
+app.use('/api', require('./routes/api.js'));
 app.use('/users', users);
-app.use('/app/:appid', function (req, res, next) {
-    require('./library/mongo').App.findById(req.params.appid).populate('products news').exec(function (err, ret) {
-        res.send(ret)
-    });
-})
 app.use('/:page', function (req, res, next) {
     // res.send(req.params)
     var page = req.params.page;
