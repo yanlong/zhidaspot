@@ -36,7 +36,7 @@ product1.save(cb(function () {
             else
                 console.log('done')
             models.App.find({
-                name: 'Zildjian'
+                name: 'xxx'
             }).populate('news products').exec(function(err, cats) {
                 console.log(cats)
                 console.log(cats.length)
