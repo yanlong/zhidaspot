@@ -39,12 +39,19 @@ var AppSchema = Schema({
     }]
 })
 
-_.each({
+var schemas = {
     User: UserSchema,
     App: AppSchema,
     News: NewsSchema,
     Product: ProductSchema
-}, function(schema, key) {
+}
+
+var models = _.reduce(schemas, function (memo, v, k) {
+    memo[k] = mongoose.model(k, v);
+    return memo;
+}, {})
+
+_.each(schemas, function(schema, key) {
     schema.pre('save', function(next) {
         var doc = this;
         Counter.findByIdAndUpdate(key, {
@@ -68,10 +75,4 @@ _.each({
 })
 
 
-module.exports = {
-    User: mongoose.model('User', UserSchema),
-    App: mongoose.model('App', AppSchema),
-    News: mongoose.model('News', NewsSchema),
-    Product: mongoose.model('Product', ProductSchema),
-    Counter: Counter,
-}
+module.exports = models;
