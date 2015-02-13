@@ -1,0 +1,29 @@
+script(src='http://apps.bdimg.com/libs/zepto/1.1.4/zepto.min.js')
+script(src='http://apps.bdimg.com/libs/require.js/2.1.11/require.min.js')
+p uname：
+    input.uname(type="text" name="uname")
+p password：
+    input.password(type="text" name="password")
+p 登录
+    input.login(type="button" name="login" value="login")
+script.
+    $(function () {
+        $('input.login').click(function () {
+            $.ajax({
+                url: '/users/login',
+                type: 'post',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    uname: $('input.uname').val(),
+                    password: $('input.password').val(),
+                }),
+                success: function (data) {
+                    alert(data)
+                },
+                error: function (xhr, err, msg) {
+                    alert(xhr.responseText  )
+                }
+            })
+        })
+
+    });
