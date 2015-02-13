@@ -3,6 +3,8 @@
 /**
  * Module dependencies.
  */
+global.config = require('../conf');
+global.logger = require('../models/Logger');
 
 var app = require('../app');
 var debug = require('debug')('zhidaspot:server');
