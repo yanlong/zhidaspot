@@ -28,6 +28,21 @@ app.use(session({
   saveUninitialized: true
 }))
 
+// User
+app.use('/', function (req, res, next) {
+    req.user = {
+        uid: req.session.uid,
+    }
+    next();
+})
+
+// Auth
+app.use('/', function (req, res, next) {
+    if (/^\/internal/.test(req.path) && !req.user.uid) {
+        return next(new Error('Auth failed.'));
+    };
+    next();
+})
 
 app.use('/', routes);
 app.use('/', require('./routes/app.js'));
@@ -53,7 +68,7 @@ app.use(function(req, res, next) {
 if (app.get('env') === 'development') {
     app.use(function(err, req, res, next) {
         res.status(err.status || 500);
-        if (req.type == 'get') {
+        if (req.method == 'GET') {
             res.render('error', {
                 message: err.message,
                 error: err

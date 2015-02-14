@@ -22,7 +22,10 @@ router.get('/login', function(req, res, next) {
     res.render('login');
 })
 router.get('/info', function(req, res, next) {
-    res.send(req.session.uid || 'nobody');
+    models.User.findOne({_id:req.session.uid}, {_id:1, uname:1}, function (err, user){
+        if (err) return next(err);
+        res.json(user);
+    })
 });
 router.get('/logout', function(req, res, next) {
     delete req.session.uid;
