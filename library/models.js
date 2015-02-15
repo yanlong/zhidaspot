@@ -94,6 +94,7 @@ var schemas = {
 
 var models = _.reduce(schemas, function (memo, v, k) {
     memo[k] = mongoose.model(k, v);
+    memo[k.toLowerCase()] = memo[k];
     return memo;
 }, {})
 
