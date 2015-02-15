@@ -12,10 +12,35 @@ router.get('/app', function (req, res, next) {
     return res.send(typeof models.App);
 })
 
-router.all('/app/:appid/:model/:modelId/:action', function(req, res, next) {
+router.get('/app/:appid', function (req, res, next) {
+    models.App.findById(req.params.appid, function (err, doc) {
+        if (err) return next(err);
+        res.json(doc);
+    })
+})
+
+router.all('/app/:appid/:model/:modelId', function(req, res, next) {
     var args = [];
-    var action = req.params.action == 'add' ? add: update;
+    var map = {
+        PUT: add,
+        POST: update,
+        GET: get,
+    }
+    var action = map[req.method];
     action(req.params.appid, req.params.model, req.params.modelId, req.body);
+    function get(appId, model, modelId) {
+        // check app and model is matched.
+        var cond = {_id:appId};
+        cond[model] = modelId;
+        models.App.findOne(cond, function(err, inst) {
+            if (err) return next(err);
+            if (!inst) return next(new Error('No such '+model));
+            models[model].findById(modelId, function (err, inst) {
+                if (err) return next(err);
+                res.json(inst);
+            })
+        })
+    }
     function add(appId, model, modelId) {
         var cond = {};
         cond[model] = modelId;
@@ -33,6 +58,7 @@ router.all('/app/:appid/:model/:modelId/:action', function(req, res, next) {
         cond[model] = modelId;
         models.App.findOne(cond, function(err, inst) {
             if (err) return next(err);
+            if (!inst) return next(new Error('No such '+model));
             models[model].findByIdAndUpdate(modelId, doc, function (err, inst) {
                 if (err) return next(err);
                 res.json(inst);
