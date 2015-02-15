@@ -23,6 +23,9 @@ var Counter = mongoose.model('Counter', CounterSchema);
 
 var NewsSchema = Schema(SchemaExtend({
     title: String,
+    postDate: String,
+    hits: Number,
+    content: String,
 }))
 
 var UserSchema = Schema(SchemaExtend({
@@ -32,6 +35,27 @@ var UserSchema = Schema(SchemaExtend({
 
 var ProductSchema = Schema(SchemaExtend({
     name: String,
+    images: [String],
+    spec: String,
+    detail: String,
+}))
+
+var PromotionSchema = Schema(SchemaExtend({
+    name: String,
+    images: [String],
+    time: String,
+    qualificatin: String,
+    detail: String,
+}))
+
+var ContactSchema = Schema(SchemaExtend({
+    qq: String,
+    tel: String,
+}))
+
+var AttractingSchema = Schema(SchemaExtend({
+    purpose: String,
+    support: String,
 }))
 
 var AppSchema = Schema(SchemaExtend({
@@ -43,14 +67,29 @@ var AppSchema = Schema(SchemaExtend({
     products: [{
         type: Number,
         ref: 'Product',
-    }]
+    }],
+    promotion: {
+        type: Number,
+        ref: 'Promotion',
+    },
+    contact: {
+        type: Number,
+        ref: 'Contact',
+    },
+    attracting: {
+        type: Number,
+        ref: 'Attracting',
+    }
 }))
 
 var schemas = {
     User: UserSchema,
     App: AppSchema,
     News: NewsSchema,
-    Product: ProductSchema
+    Product: ProductSchema,
+    Promotion: PromotionSchema,
+    Contact: ContactSchema,
+    Attracting: AttractingSchema,
 }
 
 var models = _.reduce(schemas, function (memo, v, k) {
