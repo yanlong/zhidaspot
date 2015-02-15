@@ -1,6 +1,17 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var _ = require('underscore');
+var BaseSchema = {
+    _id: Number,
+    ctime: Date,
+    mtime: Date,
+}
+
+var SchemaExtend = function (source) {
+    var base = _.clone(BaseSchema);
+    return _.extend(base, source);
+}
+
 var CounterSchema = Schema({
     _id: String,
     seq: {
@@ -10,23 +21,23 @@ var CounterSchema = Schema({
 })
 var Counter = mongoose.model('Counter', CounterSchema);
 
-var NewsSchema = Schema({
+var NewsSchema = Schema(SchemaExtend({
     _id: Number,
     title: String,
-})
+}))
 
-var UserSchema = Schema({
+var UserSchema = Schema(SchemaExtend({
     _id: Number,
     uname: String,
     password: String,
-})
+}))
 
-var ProductSchema = Schema({
+var ProductSchema = Schema(SchemaExtend({
     _id: Number,
     name: String,
-})
+}))
 
-var AppSchema = Schema({
+var AppSchema = Schema(SchemaExtend({
     _id: Number,
     name: String,
     news: [{
@@ -37,7 +48,7 @@ var AppSchema = Schema({
         type: Number,
         ref: 'Product',
     }]
-})
+}))
 
 var schemas = {
     User: UserSchema,
@@ -54,6 +65,11 @@ var models = _.reduce(schemas, function (memo, v, k) {
 _.each(schemas, function(schema, key) {
     schema.pre('save', function(next) {
         var doc = this;
+        var now = new Date();
+        doc.mtime = now;
+        if (!doc.ctime) {
+            doc.ctime = now;
+        }
         Counter.findByIdAndUpdate(key, {
             $inc: {
                 seq: 1

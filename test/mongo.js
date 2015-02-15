@@ -13,7 +13,6 @@ var cb = function (callback) {
 }
 
 console.log('#### begin')
-
 var news1 = new models.News({
     title: 'fuck',
 })
@@ -36,7 +35,7 @@ product1.save(cb(function () {
             else
                 console.log('done')
             models.App.find({
-                name: 'xxx'
+                name: 'Zildjian'
             }).populate('news products').exec(function(err, cats) {
                 console.log(cats)
                 console.log(cats.length)
