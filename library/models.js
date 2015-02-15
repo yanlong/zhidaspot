@@ -22,23 +22,19 @@ var CounterSchema = Schema({
 var Counter = mongoose.model('Counter', CounterSchema);
 
 var NewsSchema = Schema(SchemaExtend({
-    _id: Number,
     title: String,
 }))
 
 var UserSchema = Schema(SchemaExtend({
-    _id: Number,
     uname: String,
     password: String,
 }))
 
 var ProductSchema = Schema(SchemaExtend({
-    _id: Number,
     name: String,
 }))
 
 var AppSchema = Schema(SchemaExtend({
-    _id: Number,
     name: String,
     news: [{
         type: Number,
