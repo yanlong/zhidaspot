@@ -1,4 +1,4 @@
-var models = require('../library/mongo.js');
+var Models = require('../library/models.js');
 var print = console.log
 var _ = require('underscore');
 var Parallel = require('../library/Parallel');
@@ -12,15 +12,15 @@ var cb = function(callback) {
     }
 }
 console.log('#### begin')
-// var news1 = new models.News({
+// var news1 = new Models.News({
 //     title: 'fuck',
 // })
-// var product1 = new models.Product({
+// var product1 = new Models.Product({
 //     name: 'pen',
 // })
 // product1.save(cb(function() {
 //     news1.save(function(err) {
-//         var kitty = new models.App({
+//         var kitty = new Models.App({
 //             name: 'Zildjian',
 //             news: [news1._id],
 //             products: [product1._id],
@@ -29,7 +29,7 @@ console.log('#### begin')
 //             if (err) // ...
 //                 console.log(err);
 //             else console.log('done')
-//             models.App.find({
+//             Models.App.find({
 //                 name: 'Zildjian'
 //             }).populate('news products').exec(function(err, cats) {
 //                 console.log(cats)
@@ -39,8 +39,8 @@ console.log('#### begin')
 //     })
 // }))
 var p = new Parallel();
-_.each(models, function(model, name) {
-    if (name == 'App') return;
+_.each(Models, function(model, name) {
+    if (name == 'App' || name == 'User') return;
     var inst = model({});
     console.log(inst)
     p.task(name.toLowerCase(), function(done) {
@@ -49,17 +49,17 @@ _.each(models, function(model, name) {
 })
 p.done(function(err, results) {
     if (err) return console.log(err)
-    var app = new models.App({
+    var app = new Models.App({
         name: 'yanlong',
         news: [results.news._id],
-        products: [results.product._id],
+        product: [results.product._id],
         promotion: results.promotion._id,
         contact: results.contact._id,
         attracting: results.attracting._id,
     })
     app.save(function(err) {
         if (err) return console.log(err);
-        models.App.find({
+        Models.App.find({
             name: 'yanlong'
         }).populate('news products promotion contact attracting').exec(function(err, apps) {
             console.log(apps)

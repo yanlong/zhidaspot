@@ -27,13 +27,14 @@ router.all('/app/:appid/:model/:modelId', function(req, res, next) {
         GET: get,
     }
     var action = map[req.method];
-    action(req.params.appid, req.params.model, req.params.modelId, req.body);
+    action(req.params.appid, captial(req.params.model), req.params.modelId, req.body);
     function get(appId, model, modelId) {
         // check app and model is matched.
         var cond = {_id:appId};
-        cond[model] = modelId;
+        cond[model.toLowerCase()] = modelId;
         models.App.findOne(cond, function(err, inst) {
             if (err) return next(err);
+            // return res.json(cond)
             if (!inst) return next(new Error('No such '+model));
             models[model].findById(modelId, function (err, inst) {
                 if (err) return next(err);
@@ -66,4 +67,9 @@ router.all('/app/:appid/:model/:modelId', function(req, res, next) {
         })
     }
 });
+
+function captial(str) {
+    str = str || '';
+    return str.charAt(0).toUpperCase() + str.slice(1);
+}
 module.exports = router;

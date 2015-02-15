@@ -1,6 +1,10 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var _ = require('underscore');
+var mongo = require('./mongo.js');
+
+var BASE_ID = 1;
+
 var BaseSchema = {
     _id: Number,
     ctime: Date,
@@ -16,7 +20,7 @@ var CounterSchema = Schema({
     _id: String,
     seq: {
         type: Number,
-        default: 0
+        default: BASE_ID,
     },
 })
 var Counter = mongoose.model('Counter', CounterSchema);
@@ -64,7 +68,7 @@ var AppSchema = Schema(SchemaExtend({
         type: Number,
         ref: 'News'
     }],
-    products: [{
+    product: [{
         type: Number,
         ref: 'Product',
     }],
@@ -94,7 +98,7 @@ var schemas = {
 
 var models = _.reduce(schemas, function (memo, v, k) {
     memo[k] = mongoose.model(k, v);
-    memo[k.toLowerCase()] = memo[k];
+    // memo[k.toLowerCase()] = memo[k];
     return memo;
 }, {})
 
@@ -115,8 +119,9 @@ _.each(schemas, function(schema, key) {
             if (counter == null) {
                 return new Counter({
                     _id: key,
-                }).save(function(err) {
-                    doc._id = 0;
+                }).save(function(err, counter) {
+                    if (err) return next(err);
+                    doc._id = counter.seq;
                     next();
                 })
             }
