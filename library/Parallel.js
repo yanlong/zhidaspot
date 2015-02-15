@@ -21,19 +21,27 @@ Parallel.prototype.run = function() {
     function iter(name) {
         return function(err, result) {
             print('One task done: ' + name)
-            if (err) this.done(err);
+            if (err) return this._done(err);
             this.tasks[name] = result;
             this.counter++;
             if (this.counter == Object.keys(this.tasks).length) {
                 print('All tasks done.')
-                this.done(null, this.tasks);
+                this._done(null, this.tasks);
             }
         }
     }
     return this;
 }
+
+// register done callback.
 Parallel.prototype.done = function(done) {
-    this.done = done;
+    var isDone = false;
+    // wrap done callback
+    this._done = function(err, results) {
+        if (isDone) return;
+        isDone = true;
+        done(err, results);
+    };
     print('Add done task.')
     return this;
 }
