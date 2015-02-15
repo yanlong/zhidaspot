@@ -12,8 +12,10 @@ router.get('/app', function (req, res, next) {
     return res.send(typeof models.App);
 })
 
-router.get('/app/:appid/:model/:modelId/:action', function(req, res, next) {
-    add(req.params.appid, req.params.model);
+router.all('/app/:appid/:model/:modelId/:action', function(req, res, next) {
+    var args = [];
+    var action = req.params.action == 'add' ? add: update;
+    action(req.params.appid, req.params.model, req.params.modelId, req.body);
     function add(appId, model, modelId) {
         var cond = {};
         cond[model] = modelId;
@@ -22,6 +24,18 @@ router.get('/app/:appid/:model/:modelId/:action', function(req, res, next) {
             cond[model] = inst._id;
             models.App.findByIdAndUpdate(appId, cond, function (err, doc) {
                 res.json(doc)
+            })
+        })
+    }
+    function update(appId, model, modelId, doc) {
+        // check app and model is matched.
+        var cond = {_id:appId};
+        cond[model] = modelId;
+        models.App.findOne(cond, function(err, inst) {
+            if (err) return next(err);
+            models[model].findByIdAndUpdate(modelId, doc, function (err, inst) {
+                if (err) return next(err);
+                res.json(inst);
             })
         })
     }
