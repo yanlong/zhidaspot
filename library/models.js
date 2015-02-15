@@ -1,6 +1,17 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var _ = require('underscore');
+var BaseSchema = {
+    _id: Number,
+    ctime: Date,
+    mtime: Date,
+}
+
+var SchemaExtend = function (source) {
+    var base = _.clone(BaseSchema);
+    return _.extend(base, source);
+}
+
 var CounterSchema = Schema({
     _id: String,
     seq: {
@@ -10,24 +21,44 @@ var CounterSchema = Schema({
 })
 var Counter = mongoose.model('Counter', CounterSchema);
 
-var NewsSchema = Schema({
-    _id: Number,
+var NewsSchema = Schema(SchemaExtend({
     title: String,
-})
+    postDate: String,
+    hits: Number,
+    content: String,
+}))
 
-var UserSchema = Schema({
-    _id: Number,
+var UserSchema = Schema(SchemaExtend({
     uname: String,
     password: String,
-})
+}))
 
-var ProductSchema = Schema({
-    _id: Number,
+var ProductSchema = Schema(SchemaExtend({
     name: String,
-})
+    images: [String],
+    spec: String,
+    detail: String,
+}))
 
-var AppSchema = Schema({
-    _id: Number,
+var PromotionSchema = Schema(SchemaExtend({
+    name: String,
+    images: [String],
+    time: String,
+    qualificatin: String,
+    detail: String,
+}))
+
+var ContactSchema = Schema(SchemaExtend({
+    qq: String,
+    tel: String,
+}))
+
+var AttractingSchema = Schema(SchemaExtend({
+    purpose: String,
+    support: String,
+}))
+
+var AppSchema = Schema(SchemaExtend({
     name: String,
     news: [{
         type: Number,
@@ -36,24 +67,45 @@ var AppSchema = Schema({
     products: [{
         type: Number,
         ref: 'Product',
-    }]
-})
+    }],
+    promotion: {
+        type: Number,
+        ref: 'Promotion',
+    },
+    contact: {
+        type: Number,
+        ref: 'Contact',
+    },
+    attracting: {
+        type: Number,
+        ref: 'Attracting',
+    }
+}))
 
 var schemas = {
     User: UserSchema,
     App: AppSchema,
     News: NewsSchema,
-    Product: ProductSchema
+    Product: ProductSchema,
+    Promotion: PromotionSchema,
+    Contact: ContactSchema,
+    Attracting: AttractingSchema,
 }
 
 var models = _.reduce(schemas, function (memo, v, k) {
     memo[k] = mongoose.model(k, v);
+    memo[k.toLowerCase()] = memo[k];
     return memo;
 }, {})
 
 _.each(schemas, function(schema, key) {
     schema.pre('save', function(next) {
         var doc = this;
+        var now = new Date();
+        doc.mtime = now;
+        if (!doc.ctime) {
+            doc.ctime = now;
+        }
         Counter.findByIdAndUpdate(key, {
             $inc: {
                 seq: 1
