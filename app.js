@@ -28,22 +28,15 @@ app.use(session({
   saveUninitialized: true
 }))
 
+// Mount plugins
 // User
-app.use('/', function (req, res, next) {
-    req.user = {
-        uid: req.session.uid,
-    }
-    next();
-})
-
+app.use('/', require('./plugins/user.js'));
 // Auth
-app.use('/', function (req, res, next) {
-    if (/^\/internal/.test(req.path) && !req.user.uid) {
-        return next(new Error('Auth failed.'));
-    };
-    next();
-})
+app.use('/', require('./plugins/auth.js'));
+// Get app data.
+app.use('/', require('./plugins/data.js'));
 
+// Mount routes
 app.use('/', routes);
 app.use('/', require('./routes/app.js'));
 app.use('/api', require('./routes/api.js'));
