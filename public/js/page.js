@@ -94,13 +94,27 @@ define(function(require) {
                 // hide current
                 self.current && self.current.hide(duration);
                 self.current = null;
+
+                $('.x-cpt-bottomBar').hide();
+                
             } else {
                 // hide current 
                 self.current && self.current.hide(duration);
                 pages[hash].show(duration); // show targe
+
+                //for bottomBar
+                var id = hash.substr(1);
+                if($('#'+id).hasClass('x-cpt-hasBottomBar')){
+                    $('#' + $('#'+id).data('bbar')).show();
+                }else{
+                    $('.x-cpt-bottomBar').hide();
+                }
+                $('.baiduServiceBottomBar').attr('style', 'display: none !important;');
+
                 self.current = pages[hash];
             }
         }
+
         $(window).trigger('hashchange');
     }
 

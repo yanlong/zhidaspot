@@ -1,7 +1,9 @@
-div
-  .x-header
-    .btn-back
-    h1= title
+div.x-cpt-hasBottomBar(data-bbar='bbar1')
+  
+  - headerHided = false
+  - headerHideBack = false
+  - headerTitle = '公司简介'
+  include header.jade
   
   link(rel="stylesheet", href= "/widget/slider/idangerous.swiper.css")
   style.
@@ -15,7 +17,7 @@ div
       height: 40px;
       padding-left: 10px;
       line-height: 40px;
-      background: rgba(0,0,0,.5);
+      background: rgba(0,0,0,.3);
       color: #fff;
     }
     .pagination {
@@ -44,6 +46,7 @@ div
       width: 100%;
       height: 100%;
     }
+
   .x-cpt-slider
     .swiper-container
       .swiper-wrapper
@@ -57,7 +60,18 @@ div
           img(src="/img/demo-front.jpg", alt="")
           h3= 'slider3'
     .pagination
-  style.
+  
+  .x-cpt-article
+    h2 公司地址
+    p  北京市丰台区西三环西国贸汽配基地A3-2035
+    h2 主营产品或服务
+    p.
+      膜业,太阳膜,玻璃膜,防爆膜,安全膜,高隔热防爆膜,汽车防爆膜。
+    h2 简介
+    p.
+      鸿运环通(北京)国际贸易有限公司以专业营销汽车防爆膜、楼宇建筑膜为主，产品行销全国各地区，现旗下拥有"佳丽蓝尚""龙帝""冰龙""威固视窗""龙锐""彪马"“冰窗”"尚固"“欧锐”吉姆贝夫”“杜邦”等品牌，以不同的特性来适
+
+
     
 
 

@@ -17,6 +17,12 @@ define(function() {
       for(var i in queue){
         queue[i]();
       };
+    },
+    parseAddr: function (str) {
+        if (str === '') {
+            return '';
+        }
+        return str.split('_')[1];
     }
   }
 });
