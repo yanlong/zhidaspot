@@ -25,6 +25,14 @@ var CounterSchema = Schema({
 })
 var Counter = mongoose.model('Counter', CounterSchema);
 
+var CompanySchema = Schema(SchemaExtend({
+    name: String,
+    address: String,
+    main: Number,
+    intro: String,
+    images: [String],
+}))
+
 var NewsSchema = Schema(SchemaExtend({
     title: String,
     postDate: String,
@@ -72,10 +80,14 @@ var AppSchema = Schema(SchemaExtend({
         type: Number,
         ref: 'Product',
     }],
-    promotion: {
+    company: {
+        type: Number,
+        ref: 'Company',
+    },
+    promotion: [{
         type: Number,
         ref: 'Promotion',
-    },
+    }],
     contact: {
         type: Number,
         ref: 'Contact',
@@ -89,6 +101,7 @@ var AppSchema = Schema(SchemaExtend({
 var schemas = {
     User: UserSchema,
     App: AppSchema,
+    Company: CompanySchema,
     News: NewsSchema,
     Product: ProductSchema,
     Promotion: PromotionSchema,

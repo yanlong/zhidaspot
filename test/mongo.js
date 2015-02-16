@@ -48,22 +48,23 @@ _.each(Models, function(model, name) {
     })
 })
 p.done(function(err, results) {
-    if (err) return console.log(err)
+    if (err) return console.log(err);
+    var name = 'yanlong'+ Math.floor(Math.random()*10000);
     var app = new Models.App({
-        name: 'yanlong',
+        name: name,
         news: [results.news._id],
         product: [results.product._id],
-        promotion: results.promotion._id,
+        promotion: [results.promotion._id],
         contact: results.contact._id,
         attracting: results.attracting._id,
+        company: results.company._id,
     })
     app.save(function(err) {
         if (err) return console.log(err);
-        Models.App.find({
-            name: 'yanlong'
-        }).populate('news products promotion contact attracting').exec(function(err, apps) {
+        Models.App.findOne({
+            name: name
+        }).populate('news products promotion contact attracting company').exec(function(err, apps) {
             console.log(apps)
-            console.log(apps.length)
         })
     })
 }).run();

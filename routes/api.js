@@ -56,9 +56,10 @@ router.all('/app/:appid/:model/:modelId', function(req, res, next) {
     function update(appId, model, modelId, doc) {
         // check app and model is matched.
         var cond = {_id:appId};
-        cond[model] = modelId;
+        cond[model.toLowerCase()] = modelId;
         models.App.findOne(cond, function(err, inst) {
             if (err) return next(err);
+            // return res.json(cond);
             if (!inst) return next(new Error('No such '+model));
             models[model].findByIdAndUpdate(modelId, doc, function (err, inst) {
                 if (err) return next(err);
