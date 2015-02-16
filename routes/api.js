@@ -1,5 +1,5 @@
 var express = require('express');
-var models = require('../library/models.js');
+var Models = require('../library/models.js');
 var router = express.Router();
 router.post('/app/add', function(req, res, next) {
     require('../models/App.js')(req.body, function(err) {
@@ -9,11 +9,11 @@ router.post('/app/add', function(req, res, next) {
 });
 
 router.get('/app', function (req, res, next) {
-    return res.send(typeof models.App);
+    return res.send(typeof Models.App);
 })
 
 router.get('/app/:appid', function (req, res, next) {
-    models.App.findById(req.params.appid).populate('news products promotion contact attracting company').exec(function (err, doc) {
+    Models.App.findById(req.params.appid).populate('news products promotion contact attracting company').exec(function (err, doc) {
         if (err) return next(err);
         res.json(doc);
     })
@@ -32,11 +32,11 @@ router.all('/app/:appid/:model/:modelId', function(req, res, next) {
         // check app and model is matched.
         var cond = {_id:appId};
         cond[model.toLowerCase()] = modelId;
-        models.App.findOne(cond, function(err, inst) {
+        Models.App.findOne(cond, function(err, inst) {
             if (err) return next(err);
             // return res.json(cond)
             if (!inst) return next(new Error('No such '+model));
-            models[model].findById(modelId, function (err, inst) {
+            Models[model].findById(modelId, function (err, inst) {
                 if (err) return next(err);
                 res.json(inst);
             })
@@ -45,10 +45,10 @@ router.all('/app/:appid/:model/:modelId', function(req, res, next) {
     function add(appId, model, modelId) {
         var cond = {};
         cond[model] = modelId;
-        var m = new models[model]({title:'xxx'});
+        var m = new Models[model]({title:'xxx'});
         m.save(function(err, inst) {
             cond[model] = inst._id;
-            models.App.findByIdAndUpdate(appId, cond, function (err, doc) {
+            Models.App.findByIdAndUpdate(appId, cond, function (err, doc) {
                 res.json(doc)
             })
         })
@@ -57,11 +57,11 @@ router.all('/app/:appid/:model/:modelId', function(req, res, next) {
         // check app and model is matched.
         var cond = {_id:appId};
         cond[model.toLowerCase()] = modelId;
-        models.App.findOne(cond, function(err, inst) {
+        Models.App.findOne(cond, function(err, inst) {
             if (err) return next(err);
             // return res.json(cond);
             if (!inst) return next(new Error('No such '+model));
-            models[model].findByIdAndUpdate(modelId, doc, function (err, inst) {
+            Models[model].findByIdAndUpdate(modelId, doc, function (err, inst) {
                 if (err) return next(err);
                 res.json(inst);
             })
