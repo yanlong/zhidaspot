@@ -26,48 +26,48 @@ var CounterSchema = Schema({
 var Counter = mongoose.model('Counter', CounterSchema);
 
 var CompanySchema = Schema(SchemaExtend({
-    name: String,
-    address: String,
-    main: Number,
-    intro: String,
-    images: [String],
+    name: {type: String, default: "公司名称"},
+    address: {type: String, default: "公司地址"},
+    main: {type: String, default: "主营业务"},
+    intro: {type: String, default: "公司简介"},
+    images: [{type: String, default: "/img/demo-front-min.jpg"}],
 }))
 
 var NewsSchema = Schema(SchemaExtend({
-    title: String,
-    postDate: String,
-    hits: Number,
-    content: String,
+    title: {type: String, default: "新闻标题"},
+    postDate: {type: String, default: "发表日期"},
+    hits: {type: Number, default: 0},
+    content: {type: String, default: "新闻正文"},
 }))
 
 var UserSchema = Schema(SchemaExtend({
-    uname: String,
-    password: String,
+    uname: {type: String, default: "xxx"},
+    password: {type: String, default: "xxx"},
 }))
 
 var ProductSchema = Schema(SchemaExtend({
-    name: String,
-    images: [String],
-    spec: String,
-    detail: String,
+    name: {type: String, default: "产品名称"},
+    images: [{type: String, default: "/img/demo-front-min.jpg"}],
+    spec: {type: String, default: "产品规格"},
+    detail: {type: String, default: "产品详细信息"},
 }))
 
 var PromotionSchema = Schema(SchemaExtend({
-    name: String,
-    images: [String],
-    time: String,
-    qualificatin: String,
-    detail: String,
+    name: {type: String, default: "活动名称"},
+    images: [{type: String, default: "/img/demo-front-min.jpg"}],
+    time: {type: String, default: "活动时间"},
+    qualificatin: {type: String, default: "活动资格"},
+    detail: {type: String, default: "活动详情"},
 }))
 
 var ContactSchema = Schema(SchemaExtend({
-    qq: String,
-    tel: String,
+    qq: {type: String, default: "11111111"},
+    tel: {type: String, default: "11111111"},
 }))
 
 var AttractingSchema = Schema(SchemaExtend({
-    purpose: String,
-    support: String,
+    purpose: {type: String, default: "公司宗旨"},
+    support: {type: String, default: "加盟支持"},
 }))
 
 var AppSchema = Schema(SchemaExtend({

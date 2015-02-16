@@ -13,7 +13,7 @@ router.get('/app', function (req, res, next) {
 })
 
 router.get('/app/:appid', function (req, res, next) {
-    models.App.findById(req.params.appid, function (err, doc) {
+    models.App.findById(req.params.appid).populate('news products promotion contact attracting company').exec(function (err, doc) {
         if (err) return next(err);
         res.json(doc);
     })
