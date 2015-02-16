@@ -1,6 +1,6 @@
-var models = require('../library/mongo.js');
+var Models = require('../library/models.js');
 
 module.exports = function (info, cb) {
-    var app = new models.App(info);
+    var app = new Models.App(info);
     app.save(cb);
 }
