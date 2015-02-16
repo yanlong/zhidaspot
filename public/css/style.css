@@ -118,6 +118,24 @@ body {
   line-height: 22px;
 }
 
+/*cpt-news*/
+.x-cpt-news{
+  padding: 10px;
+  background: #fff;
+}
+.x-cpt-news h1{
+  font-size: 24px;
+  line-height: 34px;
+}
+.x-cpt-news p{
+  font-size: 14px;
+  line-height: 24px;
+  color: #777;
+}
+.x-cpt-news img{
+  width: 100%;
+}
+
 /*cpt-card1*/
 .x-cpt-card1{
   display: block;
