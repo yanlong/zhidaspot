@@ -44,7 +44,14 @@ app.use('/users', users);
 app.use('/:page', function (req, res, next) {
     // res.send(req.params)
     var page = req.params.page;
-    res.render('pages/'+page,req.params);
+    var pageRoot = 'pages/';
+
+    req.params.tplData = {
+        pageRoot: pageRoot,
+        page: page,
+    }
+
+    res.render(pageRoot + page, req.params);
 })
 
 // catch 404 and forward to error handler

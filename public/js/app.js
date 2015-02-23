@@ -1,23 +1,41 @@
 require(['util','page'],function(util, App) {
     var app = new App();
-    app.init();
 
-    $('a.x-jump').each(function () {
-        var hash = App.hash($(this).attr('href'));
+
+    // $('a.x-jump').each(function () {
+    //     var hash = App.hash($(this).attr('href'));
+    //     console.log(hash);
+    //     var page = hash.substr(1);
+        // if(hash == ""){
+        //     return false;
+        // }
+        // if(!$('#' + page).length){
+        //     $.get(page, function (body) {
+        //         $('.x-mask').before($(body).addClass('x-page').attr('id',page));
+        //         app.get(hash, '#'+page);
+        //     });
+        // }
+    // });
+    
+    $('body').on('click', 'a.x-jump', function(event) {
+        event.preventDefault();
+        var href = $(this).attr('href');
+        var hash = App.hash(href);
         console.log(hash);
         var page = hash.substr(1);
         if(hash == ""){
             return false;
         }
         if(!$('#' + page).length){
+            util.loading();
             $.get(page, function (body) {
                 $('.x-mask').before($(body).addClass('x-page').attr('id',page));
                 app.get(hash, '#'+page);
-
-                require(['pages/' + page], function (mod) {
-                    mod && mod();
-                });
+                util.loadingEnd();
+                window.location.href = href;
             });
+        }else{
+            window.location.href = href;
         }
     });
 
@@ -38,5 +56,7 @@ require(['util','page'],function(util, App) {
             });
         }
     };
+    app.init();
+    console.log(app);
     util.start(init);
 });

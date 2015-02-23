@@ -1,4 +1,4 @@
-require(['/widget/slider/idangerous.swiper.min.js'], function (Swiper) {
+require(['/widget/slider/idangerous.swiper.min.js', '/widget/bdmap/bdmap.js'], function (Swiper, bdmap) {
     $(function(){
 
       $('.swiper-container, .swiper-slide').css({
@@ -15,4 +15,6 @@ require(['/widget/slider/idangerous.swiper.min.js'], function (Swiper) {
         //etc..
       });
     });
+
+    bdmap.navGuide();
 });
