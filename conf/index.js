@@ -41,19 +41,4 @@ if (process.env.NODE_ENV != 'production') {
 	mergeConfig(config, development);
 }
 
-var getPluginHost = function(plugId, useSmarttag) {
-	var map = config.app.plugHostMap;
-	var host = useSmarttag ? config.app.comptruntime.host : config.app.runtime.host;
-	return map[plugId] || host;
-}
-
-config.getPluginHost = getPluginHost;
-
-config.getPluginIndex = function(plugId, useSmarttag) {
-	var url = 'http://' + config.getPluginHost(plugId, useSmarttag) + '/runtime';
-	if (!useSmarttag) {
-		url += '/';
-	}
-	return url;
-}
 module.exports = config;

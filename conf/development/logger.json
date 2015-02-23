@@ -4,7 +4,7 @@
     "category": "logger"
   }, {
     "type": "file",
-    "filename": "./log/appcore.log",
+    "filename": "./log/app.log",
     "pattern": "-yyyy-MM-dd-hh",
     "category": "logger"
   }, {
@@ -12,25 +12,9 @@
     "category": "logger2"
   }, {
     "type": "file",
-    "filename": "./log/appcore.log.wf",
+    "filename": "./log/app.log.wf",
     "pattern": "-yyyy-MM-dd-hh",
     "category": "logger2"
-  }, {
-    "type": "file",
-    "filename": "./log/appcore.log.rig",
-    "category": "rig",
-    "layout": {
-      "type": "pattern",
-      "pattern": "%m"
-    }
-  }, {
-    "type": "console",
-    "filename": "./log/appcore.log.rig",
-    "category": "rig",
-    "layout": {
-      "type": "pattern",
-      "pattern": "%m"
-    }
   }],
   "replaceConsole": false,
   "levels": {
