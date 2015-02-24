@@ -31,7 +31,7 @@ body {
   text-align: center;
   background-color: #000;
 }
-.btn-back{
+.x-btn-back{
   position: absolute;
   display: block;
   left: 0;
@@ -103,19 +103,20 @@ body {
 
 /*cpt-article*/
 .x-cpt-article{
-  background: #fff;
-  widows: 100%;
+  background: #f8f8f8;
+  width: 100%;
   box-sizing: border-box;
   padding: 5px 15px 10px;
 }
 .x-cpt-article h2{
+  margin-top: 5px;
   font-size: 16px;
-  line-height: 24px;
+  line-height: 28px;
 }
 .x-cpt-article p{
   color: #777;
   font-size: 14px;
-  line-height: 22px;
+  line-height: 25px;
 }
 
 /*cpt-news*/
@@ -398,3 +399,31 @@ body {
   border: 1px solid #000;
 }
 
+
+/*cpt-map*/
+.x-cpt-map{
+  margin: 10px 0;
+}
+.x-cpt-map-static{
+  width: 100%;
+  vertical-align:top;
+  border: 1px solid #ddd;
+  border-width: 1px 1px 0;
+  box-sizing: border-box;
+}
+.x-cpt-map-route{
+  width: 100%;
+  padding: 15px 0;
+  border: 1px solid #ddd;
+  box-sizing: border-box;
+  background: #fff;
+  text-align: center;
+}
+.x-cpt-map-route .x-btn{
+  width: 80%;
+  padding: 10px;
+  color: #fff;
+  background: #222a2e;
+  text-align: center;
+  font-size: 16px;
+}

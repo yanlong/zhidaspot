@@ -10,15 +10,11 @@ div.x-cpt-hasBottomBar(data-bbar='bbar1')
     h2 公司地址
     p 北京市丰台区西三环西国贸汽配基地A3-2035
 
-    .x-cpt-map
-      .x-el-staticMap
-
+    .x-cpt-map(data-info='{"address":{"province":"8_山东省","city":"325_泰安市","regional":"6587_岱岳区","street":"山东省泰安市岱岳区徂徕镇泰山温泉城"},"point":{"lat":36.112481,"lng":117.287401}}' data-box="0")
+      img.x-cpt-map-static(src="http://api.map.baidu.com/staticimage?width=282&height=172&center=117.287401,36.112481&markers=117.287401,36.112481&zoom=14&markerStyles=-1,http://s1.map.bdimg.com/components/static/components/elements/lbs-map/images/marker_b6b848e.png,-1&scale=2")
       .x-cpt-map-route
-        .btn.
-            <div class="mp-map" data-info="{"address":{&quot;province&quot;:&quot;8_山东省&quot;,&quot;city&quot;:&quot;325_泰安市&quot;,&quot;regional&quot;:&quot;6587_岱岳区&quot;,&quot;street&quot;:&quot;山东省泰安市岱岳区徂徕镇泰山温泉城&quot;},&quot;point&quot;:{&quot;lat&quot;:36.112481,&quot;lng&quot;:117.287401}}" data-box="0"><img src="http://api.map.baidu.com/staticimage?width=282&amp;height=172&amp;center=117.287401,36.112481&amp;markers=117.287401,36.112481&amp;zoom=14&amp;markerStyles=-1,http://s1.map.bdimg.com/components/static/components/elements/lbs-map/images/marker_b6b848e.png,-1&amp;scale=2" style="width:282px"></div>
-            <div class="btn-area">
-                <a href="http://api.map.baidu.com/marker?location=36.112481,117.287401&amp;title=%E5%B1%B1%E4%B8%9C%E7%9C%81%E6%B3%B0%E5%AE%89%E5%B8%82%E5%B2%B1%E5%B2%B3%E5%8C%BA%E5%BE%82%E5%BE%95%E9%95%87%E6%B3%B0%E5%B1%B1%E6%B8%A9%E6%B3%89%E5%9F%8E&amp;content=%E5%B1%B1%E4%B8%9C%E7%9C%81%E6%B3%B0%E5%AE%89%E5%B8%82%E5%B2%B1%E5%B2%B3%E5%8C%BA&amp;output=html&amp;src=lbscomponents%7Clbscomponents" class="btn theme-bg-color start-routes">一键导航</a>
-            </div>
+        a.x-btn(href="http://api.map.baidu.com/marker?location=36.112481,117.287401&title=%E5%B1%B1%E4%B8%9C%E7%9C%81%E6%B3%B0%E5%AE%89%E5%B8%82%E5%B2%B1%E5%B2%B3%E5%8C%BA%E5%BE%82%E5%BE%95%E9%95%87%E6%B3%B0%E5%B1%B1%E6%B8%A9%E6%B3%89%E5%9F%8E&content=%E5%B1%B1%E4%B8%9C%E7%9C%81%E6%B3%B0%E5%AE%89%E5%B8%82%E5%B2%B1%E5%B2%B3%E5%8C%BA&output=html&src=lbscomponents%7Clbscomponents").
+          一键导航
 
     h2 电话
     p 86-10-63870405
