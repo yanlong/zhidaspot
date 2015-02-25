@@ -50,7 +50,7 @@ require(['util','page'],function(util, App) {
             });
         },
         backBtn: function (){
-            $('body').on('click', '.btn-back', function(event) {
+            $('body').on('click', '.x-btn-back', function(event) {
                 event.preventDefault();
                 window.history.go(-1);
             });
