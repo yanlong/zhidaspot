@@ -48,12 +48,6 @@ require(['util','page'],function(util, App) {
                 });
                 $('.x-cpt-menu1').addClass('animated bounceInUp');
             });
-        },
-        backBtn: function (){
-            $('body').on('click', '.x-btn-back', function(event) {
-                event.preventDefault();
-                window.history.go(-1);
-            });
         }
     };
     app.init();

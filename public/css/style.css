@@ -26,19 +26,15 @@ body {
 
 /*cpts*/
 .x-header{
-  box-sizing: border-box;
+  display: -webkit-box;
   width: 100%;
   height: 45px;
-  padding: 0 45px;
   line-height: 45px;
   text-align: center;
   background-color: #000;
 }
 .x-btn-back{
-  position: absolute;
   display: block;
-  left: 0;
-  top: 0;
   width: 45px;
   height: 45px;
   background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAuCAMAAAABf/lHAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA4JpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDIxIDc5LjE1NTc3MiwgMjAxNC8wMS8xMy0xOTo0NDowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo0MTYxRjVGRjJGMjA2ODExODIyQUVENEVFQjdCMDg1OCIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDo4NTlDNTlGQTgzNTYxMUU0OUIyMUJFRjc1MkQzNzI5OCIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDo4NTlDNTlGOTgzNTYxMUU0OUIyMUJFRjc1MkQzNzI5OCIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ0MgMjAxNCAoTWFjaW50b3NoKSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjA3ZTIyYjc5LTJiMmMtNDI5NS05OWUxLWZjY2Y5ZTAwYjEwZiIgc3RSZWY6ZG9jdW1lbnRJRD0iYWRvYmU6ZG9jaWQ6cGhvdG9zaG9wOmVkYmMyMTAwLWM1NWQtMTE3Ny05YmFkLWMxMTQwYjJiMTU3MiIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PoGROh8AAAAGUExURf///////1V89WwAAAACdFJOU/8A5bcwSgAAAHtJREFUeNqUlEEOgDAMw9z/f5ohcUGaDds1YqRxVmZ3WGcw5RZVwRX8G/w2/D+4A9wb7hqfB58UzwBPB88NTxTPGqeA88HJMZ/gOOnBH2l3Ydgo8zVyBVXxFpRCWQWo2lTZqqJV7HoObxA4JBxgtOVoOWRfYhE96+sSYAADGgNJFTjtOAAAAABJRU5ErkJggg==);
@@ -46,7 +42,14 @@ body {
   background-size: 25%;
   background-position: center;
 }
+.x-btn-back a{
+  display: block;
+  width: 100%;
+  height: 100%;
+}
 .x-header h1{
+  -webkit-box-flex: 1;
+  padding-right: 45px;
   color: #fff;
   font-size: 18px;
 }
