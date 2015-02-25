@@ -103,7 +103,7 @@ define(function(require) {
                 pages[hash].show(duration); // show targe
 
                 //for bottomBar
-                var id = hash.substr(1);
+                var id = App.route(hash).page;
                 if($('#'+id).hasClass('x-cpt-hasBottomBar')){
                     $('#' + $('#'+id).data('bbar')).show();
                 }else{
@@ -122,6 +122,14 @@ define(function(require) {
         url = url || location.href;
         var hash = url.lastIndexOf('#') !== -1 ? url.substr(url.lastIndexOf('#')+1) : '';
         return hash;
+    }
+
+    App.route = function (hash) {
+        var ar = hash.substr(1).split('/');
+        return {
+            "page": ar[0],
+            'id': ar[1] || ""
+        };
     }
 
     return App;

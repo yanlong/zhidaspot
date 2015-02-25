@@ -22,20 +22,36 @@ require(['util','page'],function(util, App) {
         var href = $(this).attr('href');
         var hash = App.hash(href);
         console.log(hash);
-        var page = hash.substr(1);
+        var page = App.route(hash).page;
+        var id = App.route(hash).id;
+        console.log(app);
         if(hash == ""){
             return false;
         }
         if(!$('#' + page).length){
+            loadPage();
+        }else if(id != ""){
+            if($('#' + page).data('id') == id){
+                window.location.href = href;
+            }else{
+               $('#' + page).remove();
+               loadPage();
+            }
+        }else{
+            window.location.href = href;
+        }
+
+        function loadPage(){
             util.loading();
-            $.get(page, function (body) {
+            $.get(page+"?id=" + id, function (body) {
                 $('.x-mask').before($(body).addClass('x-page').attr('id',page));
+                if(id !== ""){
+                    $('#'+page).data('id',id);
+                }
                 app.get(hash, '#'+page);
                 util.loadingEnd();
                 window.location.href = href;
             });
-        }else{
-            window.location.href = href;
         }
     });
 
