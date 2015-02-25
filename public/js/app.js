@@ -57,13 +57,40 @@ require(['util','page'],function(util, App) {
 
     // 初始化队列
     var init = {
-        pagePreview: function(){
-            util.loadingEnd(false, function(){
-                $('.x-cpt-menu1').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
-                    $('a', this).addClass('animated rubberBand');
-                });
-                $('.x-cpt-menu1').addClass('animated bounceInUp');
+        firstPage: function(){
+            var hash = App.hash();
+            var page = App.route(hash).page;
+            var id = App.route(hash).id;
+            if(hash == ""){
+                end();
+                return false;
+            }
+            $.get(page + (id == ""? "?" + id : ""), function (body) {
+                $('.x-mask').before($(body).addClass('x-page').attr('id',page));
+                if(id !== ""){
+                    $('#'+page).data('id',id);
+                }
+                var now = app.get(hash, '#'+page);
+                app.current = now;
+                now.show(0);
+                var id = page;
+                if($('#'+id).hasClass('x-cpt-hasBottomBar')){
+                    $('#' + $('#'+id).data('bbar')).show();
+                }else{
+                    $('.x-cpt-bottomBar').hide();
+                }
+                $('.baiduServiceBottomBar').attr('style', 'display: none !important;');
+
+                end();
             });
+            function end(){
+                util.loadingEnd(false, function(){
+                    $('.x-cpt-menu1').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+                        $('a', this).addClass('animated rubberBand');
+                    });
+                    $('.x-cpt-menu1').addClass('animated bounceInUp');
+                });
+            }
         }
     };
     app.init();

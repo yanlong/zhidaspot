@@ -26,6 +26,7 @@ define(function(require) {
     };
 
     Page.prototype.showAnimation = function(duration) {
+        dura = duration !== undefined ? (duration/1000+"").slice(1) : ".3";
         this.scrollTop = document.body.scrollTop;
         var e = $(window).width();
         this.$el.css({
@@ -38,11 +39,11 @@ define(function(require) {
         });
         this.$el.size() && this.$el.get(0).clientLeft;
         this.$el.css({
-            "-webkit-transition": ".3s -webkit-transform ease-in-out",
+            "-webkit-transition": dura + "s -webkit-transform ease-in-out",
             "-webkit-transform": "none",
-            "transition": ".3s transform ease-in-out",
+            "transition": dura + "s transform ease-in-out",
             "transform": "none",
-            "-ms-transition": ".3s -webkit-transform ease-in-out",
+            "-ms-transition": dura + "s -webkit-transform ease-in-out",
             "-ms-transform": "none"
         });
         setTimeout($.proxy(this.handleShowComplete, this), duration)
@@ -82,6 +83,7 @@ define(function(require) {
 
     App.prototype.get = function(hash, el) {
         this.pages[hash] = new Page(hash, el);
+        return this.pages[hash];
     }
 
     App.prototype.init = function() {
