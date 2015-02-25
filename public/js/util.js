@@ -4,7 +4,7 @@ define(function() {
   return {
     loading: function(fn){
       fn && fn();
-      $(clsname)
+      $(clsname).css('display','block');
       $(clsname + '-loading').css('display','block');
     },
     loadingEnd: function(stop, fn){
