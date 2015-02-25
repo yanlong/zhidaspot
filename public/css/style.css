@@ -64,7 +64,8 @@ body {
   display: block;
   bottom: 0;
   width: 100%;
-   background:-webkit-gradient(linear, 50% 0%, 50% 10%, from(rgba(0,0,0,0.6)), to(rgba(0,0,0,.6)) );
+  padding-top: 30px;
+   background:-webkit-gradient(linear, 50% 0%, 50% 20%, from(rgba(0,0,0,0)), to(rgba(0,0,0,1)) );
 }
 .x-cpt-menu1 ul{
   display: -webkit-box;
