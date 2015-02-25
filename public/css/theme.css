@@ -32,7 +32,6 @@
   }
 }
 
-
 .x-theme-highlight{
   position: absolute;
   top: 0;
@@ -50,5 +49,10 @@
   0% {opacity: 0;}
   100% {opacity: 1;}
 }
-/*@-webkit-keyframes move_eye { 0% { background-position:-100% -100%; } 100% { margin-left:100% 100%; }  }*/
-/*@keyframes move_eye { 0% { background-position:-100% -100%; } 100% { margin-left:100% 100%; } }*/
+
+#news, #newsdetail{
+  background: #fff;
+}
+#company, #attracting, #contact, #productdetail{
+  background: #f8f8f8;
+}

@@ -17,12 +17,6 @@ body {
     background: #ddd;
     box-sizing: border-box;
 }
-#news, #newsdetail{
-  background: #fff;
-}
-#attracting{
-  background: #f8f8f8;
-}
 
 /*cpts*/
 .x-header{
