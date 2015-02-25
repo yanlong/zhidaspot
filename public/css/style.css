@@ -17,8 +17,11 @@ body {
     background: #ddd;
     box-sizing: border-box;
 }
-#news{
+#news, #newsdetail{
   background: #fff;
+}
+#attracting{
+  background: #f8f8f8;
 }
 
 /*cpts*/
@@ -119,6 +122,9 @@ body {
   font-size: 14px;
   line-height: 25px;
 }
+.x-cpt-article ul li{
+  color: #777;
+}
 
 /*cpt-news*/
 .x-cpt-news{
@@ -141,9 +147,12 @@ body {
 /*cpt-card1*/
 .x-cpt-card1{
   display: block;
-  margin: 10px 10px 0;
+  margin: 0 10px 10px;
   background: #fff;
   border: 1px solid #ddd;
+}
+.x-cpt-card1:nth-child(1){
+  margin-top: 10px;
 }
 .x-cpt-card1 a{
   display: block;
@@ -187,7 +196,7 @@ body {
   transform:translate(-50%,-50%);
 }
 
-/*cpt-list*/
+/*cpt-list1*/
 .x-cpt-list1 li>a, .x-cpt-list2 li>a{
   position: relative;
   display: block;
@@ -210,8 +219,6 @@ body {
   transform:translate(-50%,-50%);
 }
 
-
-/*cpt-list1*/
 .x-cpt-list1{
   background: #fff;
 }
@@ -230,12 +237,13 @@ body {
 }
 .x-cpt-list1 li>img, .x-cpt-list1 li>a>img{
   -webkit-box-flex: 0;
-  width: 60px;
+  width: 80px;
   height: 60px;
   margin-right: 10px;
 }
 .x-cpt-list1 li>div, .x-cpt-list1 li>a>div{
   -webkit-box-flex: 1;
+  padding-right: 10px;
 }
 .x-cpt-list1 li>div h2, .x-cpt-list1 li>a>div h2{
   width: 100%;
@@ -397,6 +405,7 @@ body {
   color: #fff;
 }
 .x-btn-empt{
+  color: #000;
   border: 1px solid #000;
 }
 
