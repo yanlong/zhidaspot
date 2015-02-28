@@ -18,6 +18,16 @@ html
       include ../public/css/preview.css
       include ../public/css/theme.css
 
+    //- 统计
+    script.
+      var _hmt = _hmt || [];
+      (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?9840632da973f35216de6b672cd86dcd";
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+      })();
+
   body
     block content
 
