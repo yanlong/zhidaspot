@@ -12,32 +12,7 @@ var cb = function(callback) {
     }
 }
 console.log('#### begin')
-// var news1 = new Models.News({
-//     title: 'fuck',
-// })
-// var product1 = new Models.Product({
-//     name: 'pen',
-// })
-// product1.save(cb(function() {
-//     news1.save(function(err) {
-//         var kitty = new Models.App({
-//             name: 'Zildjian',
-//             news: [news1._id],
-//             products: [product1._id],
-//         });
-//         kitty.save(function(err) {
-//             if (err) // ...
-//                 console.log(err);
-//             else console.log('done')
-//             Models.App.find({
-//                 name: 'Zildjian'
-//             }).populate('news products').exec(function(err, cats) {
-//                 console.log(cats)
-//                 console.log(cats.length)
-//             })
-//         });
-//     })
-// }))
+
 var p = new Parallel();
 _.each(Models, function(model, name) {
     if (name == 'App' || name == 'User') return;

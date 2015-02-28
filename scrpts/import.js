@@ -1,7 +1,7 @@
 var xlsx = require('node-xlsx');
 var util = require('util');
  
-var obj = xlsx.parse(__dirname + '/data/app.xlsx');
+var obj = xlsx.parse('../test/data/app.xlsx');
 
 // console.log(util.inspect(obj,{depth:null}))
 
@@ -69,6 +69,11 @@ promotionData.forEach(function (v) {
     })
 })
 console.log(JSON.stringify(app));
+var App =require('../models/App.js')
+
+App(app, function (err) {
+    console.log(err);
+});
 
 function parseImages(content) {
     content = content || '';

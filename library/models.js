@@ -38,6 +38,7 @@ var NewsSchema = Schema(SchemaExtend({
     postDate: {type: String, default: "发表日期"},
     hits: {type: Number, default: 0},
     content: {type: String, default: "新闻正文"},
+    images: [{type: String, default: "/img/demo-front-min.jpg"}],
 }))
 
 var UserSchema = Schema(SchemaExtend({
@@ -47,6 +48,7 @@ var UserSchema = Schema(SchemaExtend({
 
 var ProductSchema = Schema(SchemaExtend({
     name: {type: String, default: "产品名称"},
+    logo: {type: String, default: "/img/demo-front-min.jpg"},
     images: [{type: String, default: "/img/demo-front-min.jpg"}],
     spec: {type: String, default: "产品规格"},
     detail: {type: String, default: "产品详细信息"},
@@ -63,11 +65,13 @@ var PromotionSchema = Schema(SchemaExtend({
 var ContactSchema = Schema(SchemaExtend({
     qq: {type: String, default: "11111111"},
     tel: {type: String, default: "11111111"},
+    images: [{type: String, default: "/img/demo-front-min.jpg"}],
 }))
 
 var AttractingSchema = Schema(SchemaExtend({
     purpose: {type: String, default: "公司宗旨"},
     support: {type: String, default: "加盟支持"},
+    images: [{type: String, default: "/img/demo-front-min.jpg"}],
 }))
 
 var AppSchema = Schema(SchemaExtend({
