@@ -4,11 +4,11 @@ div.x-cpt-hasBottomBar(data-bbar='bbar1')
   include ../utils/header
 
   .x-el-bigImg
-    img(src="/img/demo-contact.jpg")
+    img(src=app.contact.images[0])
 
   .x-cpt-article
     h2 公司地址
-    p 北京市丰台区西三环西国贸汽配基地A3-2035
+    p= app.contact.address
 
     .x-cpt-map(data-info='{"address":{"province":"8_山东省","city":"325_泰安市","regional":"6587_岱岳区","street":"山东省泰安市岱岳区徂徕镇泰山温泉城"},"point":{"lat":36.112481,"lng":117.287401}}' data-box="0")
       img.x-cpt-map-static(src="http://api.map.baidu.com/staticimage?width=282&height=172&center=117.287401,36.112481&markers=117.287401,36.112481&zoom=14&markerStyles=-1,http://s1.map.bdimg.com/components/static/components/elements/lbs-map/images/marker_b6b848e.png,-1&scale=2")
@@ -17,12 +17,14 @@ div.x-cpt-hasBottomBar(data-bbar='bbar1')
           一键导航
 
     h2 电话
-    p 86-10-63870405
-    h2 传真
-    p 86-10-63870654
-    h2 手机
-    p 13798183162
-    h2 邮箱
-    p 13798183@qq.com
+    p= app.contact.tel
+    h2 电话
+    p= app.contact.qq
+    //- h2 传真
+    //- p 86-10-63870654
+    //- h2 手机
+    //- p 13798183162
+    //- h2 邮箱
+    //- p 13798183@qq.com
 
   include ../utils/hasScript
