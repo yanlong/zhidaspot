@@ -4,9 +4,9 @@ div
   include ../utils/header
 
   ul.x-cpt-list1
-    each product in app.product
+    each product,index in app.product
       li
-        a.x-jump(href="#/productdetail/1")
+        a.x-jump(href="#/productdetail/"+index)
           img(src=product.logo)
           div
             h2= product.name

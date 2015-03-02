@@ -43,7 +43,7 @@ app.use('/', routes);
 app.use('/', require('./routes/app.js'));
 app.use('/api', require('./routes/api.js'));
 app.use('/users', users);
-app.use('/:page', function (req, res, next) {
+app.use('/:page/:pageId?', function (req, res, next) {
     // res.send(req.params)
     var page = req.params.page;
     var pageRoot = 'pages/';
@@ -51,9 +51,11 @@ app.use('/:page', function (req, res, next) {
     req.params.tplData = {
         pageRoot: pageRoot,
         page: page,
+        pageId: req.params.pageId || req.query.id,
     }
     var params = require('underscore').clone(req.params);
     params.app = req.data;
+    // return res.json(params);
     res.render(pageRoot + page, params);
 })
 

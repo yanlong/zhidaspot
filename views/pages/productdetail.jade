@@ -1,22 +1,16 @@
 div 
   - headerTitle = '产品详情'
+  - var product = app.product[tplData.pageId]
   include ../utils/header
 
   .x-el-bigImg
-    img(src="/img/demo-article5.jpg")
+    img(src=product.images[0])
 
   .x-cpt-contact
     include ../utils/qqWithTel
 
   .x-cpt-article
     h2 产品参数
-    ul
-      li 隔紫外线率：99%
-      li 透光率：   16%
-      li 隔热率：   75%
+    ul= product.spec
     h2 产品详情
-    p.
-       “彪马顶级隔热膜”是美国CLC集团打造的一个品牌，是美国Commonwealth Laminating & Coating INC.
-       (简称“CLC”)“彪马顶级隔热膜”美国联邦特种制造，它拥有世界上最先进的玻璃膜生产设备，是全球著名最大的玻璃膜制造商。
-       公司所提供的玻璃膜全部在美国佛吉尼亚的马丁斯维尔(Martinsville, VA, USA)生产，
-       不管在研究、技术、生产最优化、全球经销及客户服务等领域均处于绝对领先地位。
+    p= product.detail
