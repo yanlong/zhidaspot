@@ -54,9 +54,10 @@ productData.forEach(function (v) {
 })
 
 newsData.forEach(function (v) {
+    var postDate = new Date(1900, 0, v[1]-1);
     news.push({
         title: v[0],
-        postDate: v[1],
+        postDate: util.format('%d/%d/%d',postDate.getFullYear(), postDate.getMonth()+1, postDate.getDate()),
         content: v[2],
         images: parseImages(v[3]),
     })

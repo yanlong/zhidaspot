@@ -3,23 +3,9 @@ div
   include ../utils/header
 
   ul.x-cpt-list2
-    li
-      a.x-jump(href="#/newsdetail/1")
-        h2 5月加盟商信息
-        p 各代理商信息已经短信发送，请即查收信息！如有疑问，请打客服电话咨询
-        .x-cpt-list2-time 2015-12-20
-    li
-      a.x-jump(href="#/newsdetail/2")
-        h2 新版网站正式启动代理商...
-        p 即日起新版网站正式启动代理商查询系统，客户代理商在成功申请成为...
-        .x-cpt-list2-time 2015-12-20
-    li
-      a.x-jump(href="#/newsdetail/3")
-        h2 汽车贴膜导购 环通贸易友好协会
-        p 汽车贴膜(Auto foil是在车辆前后风挡玻璃、侧窗玻璃以及天窗上贴上
-        .x-cpt-list2-time 2015-1-20
-    li
-      a.x-jump(href="#/newsdetail/4")
-        h2 了解太阳热能
-        p 太阳表面温度高达6000℃，它是以热辐射的形式，经宇宙空间传给地球...
-        .x-cpt-list2-time 2015-03-20
+    each news,index in app.news
+      li
+        a.x-jump(href="#/newsdetail/"+index)
+          h2= news.title
+          p= news.content
+          .x-cpt-list2-time= news.postDate

@@ -1,18 +1,12 @@
 div 
   - headerTitle = '新闻详情'
+  - var news = app.news[tplData.pageId]
   include ../utils/header
 
   .x-cpt-news
-    h1 汽车贴膜导购环通贸易友情贴士
-    p 更新时间：[2011-08-05]
-    p 阅读：905次
-    p.
-      汽车贴膜(Auto foil是在车辆前后风挡玻璃、侧
-      窗玻璃以及天窗上贴上一层薄膜状物体，又称
-      为太阳膜或者防爆隔热膜。它作用主要是阻挡
-      紫外线、阻隔部分热量以及防止玻璃突然爆裂
-      导致的伤人等情况发生，同时根据太阳膜的单
-      向透视性能，达到保护个人隐私的目的。此外
-      它也可以减少车内物品以及人员因紫外线照射
-      造成的损伤
-    img(src="/img/demo-article7.jpg", alt="")
+    h1= news.title
+    p 更新时间：[#{news.postDate}]
+    p 阅读：#{news.hits}次
+    p
+      = news.content
+    img(src=news.images[0], alt="")
