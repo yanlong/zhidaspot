@@ -3,23 +3,14 @@ div
   include ../utils/header
 
   ul
-    li.x-cpt-card1
-      a(class='x-jump' href='#/promodetail/1')
-        div
-          .x-el-titleImg
-            img(src="/img/demo-card.jpg")
-            div
-              h2 立即参与赢百万红包
-              p 活动时间：  2015年1月1日-2015年3月1日
-          p 参与简单、人人有份哦，只需在百度搜索框中输入“红包”“春节红包”等关键字，即搜即得红包大礼：海景房，环保车，美好的旅行  红包”等关键字，即搜即得红包大礼：海景房，环保车，美好的旅行
-        div 阅读全文
-    li.x-cpt-card1
-      a(class='x-jump' href='#/promodetail/2')
-        div
-          .x-el-titleImg
-            img(src="/img/demo-article4.jpg")
-            div
-              h2 立即参与赢百万红包
-              p 活动时间：  2015年1月1日-2015年3月1日
-          p 参与简单、人人有份哦，只需在百度搜索框中输入“红包”“春节红包”等关键字，即搜即得红包大礼：海景房，环保车，美好的旅行  红包”等关键字，即搜即得红包大礼：海景房，环保车，美好的旅行
-        div 阅读全文
+    each promotion,index in app.promotion
+      li.x-cpt-card1
+        a(class='x-jump' href='#/promodetail/'+index)
+          div
+            .x-el-titleImg
+              img(src=promotion.images[0])
+              div
+                h2= promotion.name
+                p= promotion.time
+            p= promotion.qualification
+          div 阅读全文
