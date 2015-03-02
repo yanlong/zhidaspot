@@ -31,6 +31,8 @@ app.use(session({
 // Mount plugins
 // User
 app.use('/', require('./plugins/user.js'));
+// Token
+app.use('/', require('./plugins/token.js'));
 // Auth
 app.use('/', require('./plugins/auth.js'));
 // Get app data.
@@ -50,8 +52,9 @@ app.use('/:page', function (req, res, next) {
         pageRoot: pageRoot,
         page: page,
     }
-
-    res.render(pageRoot + page, req.params);
+    var params = require('underscore').clone(req.params);
+    params.app = req.data;
+    res.render(pageRoot + page, params);
 })
 
 // catch 404 and forward to error handler
