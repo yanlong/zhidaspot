@@ -1,7 +1,9 @@
 var xlsx = require('node-xlsx');
 var util = require('util');
- 
-var obj = xlsx.parse('../test/data/app.xlsx');
+
+var args = process.argv.slice(2);
+var file = args[0];
+var obj = xlsx.parse(file);
 
 // console.log(util.inspect(obj,{depth:null}))
 
