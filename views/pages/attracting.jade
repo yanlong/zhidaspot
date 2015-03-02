@@ -4,12 +4,10 @@ div.x-cpt-hasBottomBar(data-bbar='bbar1')
   include ../utils/header
 
   .x-el-bigImg
-    img(src="/img/demo-contact2.jpg")
+    img(src=app.attracting.images[0])
 
   .x-cpt-article
     h2 合作宗旨
-    p.
-      双赢，这是我们合作的基础。优秀的合作伙伴将使双方如虎添翼，我们坚信，强强联手将会使我们的力量更加强大。通过彼此的资源共享，达到优势互补，让我们的服务更趋完善，取长补短，达到利益最大化，从而让双方合作成为最有利的双赢合作。
+    p= app.attracting.purpose
     h2 加盟支持
-    p.
-       公司授权资格证书   全国统一促销    专业安装培训   环通公司质保    公司提供强大技术及市场支持
+    p= app.attracting.support
