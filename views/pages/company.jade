@@ -48,21 +48,16 @@ div.x-cpt-hasBottomBar(data-bbar='bbar1')
   .x-cpt-slider
     .swiper-container
       .swiper-wrapper
-        .swiper-slide
-          img(src="/img/demo-article1.jpg", alt="")
-          h3= '防爆膜'
-        .swiper-slide
-          img(src="/img/demo-article2.jpg", alt="")
-          //- p= 222222
-          h3= '隔热膜'
-        .swiper-slide
-          img(src="/img/demo-article3.jpg", alt="")
-          h3= '太阳膜'
+        each url in app.company.images
+          .swiper-slide
+            img(src=url, alt="")
+            //- p= 222222
+            //- h3= '隔热膜'
     .pagination
   
   .x-cpt-article
     h2 公司地址
-    p  北京市丰台区西三环西国贸汽配基地A3-2035
+    p= app.company.address
 
     .x-cpt-map(data-info='{"address":{"province":"8_山东省","city":"325_泰安市","regional":"6587_岱岳区","street":"山东省泰安市岱岳区徂徕镇泰山温泉城"},"point":{"lat":36.112481,"lng":117.287401}}' data-box="0")
       img.x-cpt-map-static(src="http://api.map.baidu.com/staticimage?width=282&height=172&center=117.287401,36.112481&markers=117.287401,36.112481&zoom=14&markerStyles=-1,http://s1.map.bdimg.com/components/static/components/elements/lbs-map/images/marker_b6b848e.png,-1&scale=2")
@@ -71,12 +66,10 @@ div.x-cpt-hasBottomBar(data-bbar='bbar1')
           一键导航
             
     h2 主营产品或服务
-    p.
-      膜业,太阳膜,玻璃膜,防爆膜,安全膜,高隔热防爆膜,汽车防爆膜。
+    p= app.company.main
     h2 简介
-    p.
-      鸿运环通(北京)国际贸易有限公司以专业营销汽车防爆膜、楼宇建筑膜为主，产品行销全国各地区，现旗下拥有"佳丽蓝尚""龙帝""冰龙""威固视窗""龙锐""彪马"“冰窗”"尚固"“欧锐”吉姆贝夫”“杜邦”等品牌，以不同的特性来适
-
+    p= app.company.intro
+      
   include ../utils/hasScript
 
 
