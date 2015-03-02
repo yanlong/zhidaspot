@@ -120,6 +120,7 @@ var models = _.reduce(schemas, function (memo, v, k) {
 }, {})
 
 _.each(schemas, function(schema, key) {
+    // Add auto increment id for models.
     schema.pre('save', function(next) {
         var doc = this;
         var now = new Date();
@@ -146,7 +147,27 @@ _.each(schemas, function(schema, key) {
             next();
         });
     });
+    // 
+    schema.post('init', function (doc) {
+        _.each(doc._doc, function (v,key) {
+            if (_.isString(v)) {
+                doc[key] = str2html(v);
+            }
+        })
+    })
 })
 
+function str2html(str) {
+    if (str) {
+        var text = str;
+        // text = text.replace(/"/g, '&#34;').replace(/'/g, '&#39;');
+        // text = text.replace(/</g, '&#60;').replace(/>/g, '&#62;');
+        // text = text.replace(/\\/g, '&#92;').replace(/`/g, '&#96;');
+        text = text.replace(/\n/g, '<br>');
+        // text = text.replace(/\s/g, ' &nbsp; ');
+        return text;
+    }
+    return '';
+}
 
 module.exports = models;
