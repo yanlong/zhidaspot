@@ -65,7 +65,7 @@ promotionData.forEach(function (v) {
     promotion.push({
         name: v[0],
         time: v[1],
-        qualificatin: v[2],
+        qualification: v[2],
         detail: v[3],
         images: parseImages(v[4]),
     })

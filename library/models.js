@@ -58,7 +58,7 @@ var PromotionSchema = Schema(SchemaExtend({
     name: {type: String, default: "活动名称"},
     images: [{type: String, default: "/img/demo-front-min.jpg"}],
     time: {type: String, default: "活动时间"},
-    qualificatin: {type: String, default: "活动资格"},
+    qualification: {type: String, default: "活动资格"},
     detail: {type: String, default: "活动详情"},
 }))
 
