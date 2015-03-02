@@ -4,39 +4,10 @@ div
   include ../utils/header
 
   ul.x-cpt-list1
-    li
-      a.x-jump(href="#/productdetail/1")
-        img(src="/img/demo-list1.jpg")
-        div
-          h2 彪马顶级汽车隔热膜彪马顶级汽车隔热膜彪马顶级汽车隔热膜彪马顶级汽车隔热膜
-          p 为您的爱车创造一个新悦、唯美、时尚的内饰环境为您的爱车创造一个新悦、唯美、时尚的内饰环境为您的爱车创造一个新悦、唯美、时尚的内饰环境为您的爱车创造一个新悦、唯美、时尚的内饰环境为您的爱车创造一个新悦、唯美、时尚的内饰环境
-    li
-      a.x-jump(href="#/productdetail/2")
-        img(src="/img/demo-list2.jpg")
-        div
-          h2 龙锐汽车隔热膜
-          p 世界上最受推崇的高性能玻璃膜品牌
-    li
-      a.x-jump(href="#/productdetail/3")
-        img(src="/img/demo-list3.jpg")
-        div
-          h2 威固视窗美国磁控隔热膜
-          p 长达八年的质保期，为消费者解除后顾之忧
-    li
-      a.x-jump(href="#/productdetail/4")
-        img(src="/img/demo-list4.jpg")
-        div
-          h2 龙帝顶级隔热膜
-          p 按照严格的市场管理力求做到一对一的客户服务
-    li
-      a.x-jump(href="#/productdetail/5")
-        img(src="/img/demo-list5.jpg")
-        div
-          h2 冰龙汽车隔热膜
-          p 安全保护和节能等方面性能优异，趋于完美
-    li
-      a.x-jump(href="#/productdetail/6")
-        img(src="/img/demo-list6.jpg")
-        div
-          h2 佳丽蓝尚磁控高隔热膜
-          p 35年窗膜制造经验,世界三大窗膜生产厂家之一
+    each product in app.product
+      li
+        a.x-jump(href="#/productdetail/1")
+          img(src=product.logo)
+          div
+            h2= product.name
+            p= product.detail
