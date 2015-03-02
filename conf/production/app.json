@@ -1,5 +1,9 @@
 {
-	"workers": 4,
-	"maxSockets": 500,
-	"loggerConfigFile": "conf/production/logger.json"
+    "workers": 4,
+    "maxSockets": 500,
+    "mongodb": {
+        "host": "127.0.0.1:8301",
+        "name": "zhidaspot"
+    },
+    "loggerConfigFile": "conf/production/logger.json"
 }
