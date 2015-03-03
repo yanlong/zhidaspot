@@ -4,7 +4,7 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
     res.render('index', {
         title: req.data && req.data.company.name,
-        data: JSON.stringify(req.data|| {}),
+        app: req.data,
     });
 });
 module.exports = router;

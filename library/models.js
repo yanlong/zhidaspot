@@ -76,6 +76,9 @@ var AttractingSchema = Schema(SchemaExtend({
 
 var AppSchema = Schema(SchemaExtend({
     name: String,
+    style: {
+        bgImage:{type: String, default: "/img/demo-front-min.jpg"},
+    },
     news: [{
         type: Number,
         ref: 'News'

@@ -3,11 +3,11 @@ extends layout
 block content
   .x-page-index
     .x-page-bg
-        img(src="/img/demo-front-min.jpg", alt="")
+        img(src=app.style.bgImage, alt="")
     .x-theme-highlight
-
     - var menu = [ {name:'公司简介',ename:'Company',url:'#/company'}, {name:'产品中心',ename:'Products',url:'#/products'},{name:'促销信息',ename:'Promotion',url:'#/promotion'},{name:'新闻中心',ename:'News',url:"#/news"},{name:'招商加盟',ename:'Attracting',url:'#/attracting'},{name:'联系我们',ename:'Contact us',url:'#/contact'}]
     - var menuSize = 3
+    - var zhidaspot = JSON.stringify(app||{});
     
     .x-cpt-menu1
 
@@ -22,4 +22,4 @@ block content
             != '</ul><ul>'
 
   script.
-    window.zhidaspot = !{data};
+    window.zhidaspot = !{zhidaspot};
