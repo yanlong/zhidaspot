@@ -8,6 +8,10 @@ function Parallel() {
     print('Create done.')
 }
 Parallel.prototype.task = function(name, task) {
+    if (!task) {
+        task = name;
+        name = 'task'+ Math.floor(Math.random() * 1e12);
+    }
     this.tasks[name] = task;
     print('Add task: ' + name)
     return this;
