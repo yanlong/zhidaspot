@@ -30,6 +30,7 @@ var CompanySchema = Schema(SchemaExtend({
     address: {type: String, default: "公司地址"},
     main: {type: String, default: "主营业务"},
     intro: {type: String, default: "公司简介"},
+    introImage: {type: String, default: "/img/demo-front-min.jpg"},
     images: [{type: String, default: "/img/demo-front-min.jpg"}],
 }))
 

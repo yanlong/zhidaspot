@@ -1,7 +1,7 @@
 var Models = require('../library/models.js');
 var _ = require('underscore');
 var Parallel = require('../library/Parallel');
-module.exports = function(info, cb) {
+module.exports = function(info, callback) {
     var p = new Parallel();
     var app = {};
     _.each(Models, function(Model, name) {
@@ -34,17 +34,15 @@ module.exports = function(info, cb) {
         }
     })
     p.done(function(err, results) {
-        if (err) return console.log(err);
+        if (err) return callback(err);
         var name = 'yanlong' + Math.floor(Math.random() * 10000);
         app.name = name;
         var inst = new Models.App(app)
         inst.save(function(err) {
-            if (err) return console.log(err);
+            if (err) return callback(err);
             Models.App.findOne({
                 name: name
-            }).populate('news products promotion contact attracting company').exec(function(err, apps) {
-                console.log(apps)
-            })
+            }).populate('news products promotion contact attracting company').exec(callback)
         })
     }).run();
 }

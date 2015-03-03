@@ -1,11 +1,12 @@
 var xlsx = require('node-xlsx');
 var util = require('util');
+var _ = require('underscore');
+var Parallel = require('../library/Parallel.js');
 
 var args = process.argv.slice(2);
 var file = args[0];
 var obj = xlsx.parse(file);
-
-// console.log(util.inspect(obj,{depth:null}))
+global.config = require('../conf')
 
 var appData = obj[0]['data'][1];
 var productData = obj[1]['data'].slice(1);
@@ -71,12 +72,48 @@ promotionData.forEach(function (v) {
         images: parseImages(v[4]),
     })
 })
-console.log(JSON.stringify(app));
+// console.log(JSON.stringify(app));
 var App =require('../models/App.js')
+var p = new Parallel();
+var dump = function (src, callback) {
+    p.task(function (done) {
+        require('../library/Timg.js').dump(src, function (err, file) {
+            console.log(file)
+            callback(err, file);
+            done(err,file);
+        });
+    })
+}
 
-App(app, function (err) {
-    console.log(err);
-});
+
+tree(app, function (value, key, obj) {
+    if (key in {
+        images: true,
+        introImage: true,
+        logo: true,
+        bgImage: true,
+    }) {
+        if (_.isArray(value)) {
+            value.forEach(function (v,index) {
+                dump(v, function (err, file) {
+                    value[index] = file;
+                })
+            })
+        } else {
+            dump(value, function (err, file) {
+                obj[key] = file;
+            })
+        }
+    }
+})
+
+p.done(function (err, results) {
+    if (err) return console.log(err)
+    App(app, function (err,doc) {
+        console.log(util.inspect(doc._doc, {depth:null}))
+    });
+}).run();
+
 
 function parseImages(content) {
     content = content || '';
@@ -89,4 +126,19 @@ function parseImages(content) {
         }
     })
     return images;
+}
+
+
+function tree(obj, proc) {
+    if (typeof obj !== 'object') throw new Error('invalid parameter');
+    for (var key in obj) {
+        var value = obj[key];
+        if (_.isObject(value) && !_.isArray(value)) {
+            tree(value, proc);
+        } else if (_.isArray(value) && _.isObject(value[0])){
+            tree(value, proc);
+        } else {
+            proc(value, key, obj);
+        }
+    }
 }
