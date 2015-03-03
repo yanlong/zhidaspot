@@ -7,6 +7,5 @@ div
     h1= news.title
     p 更新时间：[#{news.postDate}]
     p 阅读：#{news.hits}次
-    p
-      = news.content
+    p!= news.content
     img(src=news.images[0], alt="")

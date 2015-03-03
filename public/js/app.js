@@ -1,7 +1,6 @@
 require(['util','page'],function(util, App) {
     var app = new App();
 
-
     // $('a.x-jump').each(function () {
     //     var hash = App.hash($(this).attr('href'));
     //     console.log(hash);
@@ -43,57 +42,63 @@ require(['util','page'],function(util, App) {
 
         function loadPage(){
             util.loading();
-            $.get(page+"?id=" + id, function (body) {
+            $.get(page + (id != ""? "/" + id : ""), function (body) {
                 $('.x-mask').before($(body).addClass('x-page').attr('id',page));
                 if(id !== ""){
                     $('#'+page).data('id',id);
                 }
                 app.get(hash, '#'+page);
+                util.start(util._pageInit(page));
                 util.loadingEnd();
                 window.location.href = href;
             });
         }
     });
-
-    // 初始化队列
-    var init = {
-        firstPage: function(){
-            var hash = App.hash();
-            var page = App.route(hash).page;
-            var id = App.route(hash).id;
-            if(hash == ""){
-                end();
-                return false;
-            }
-            $.get(page + (id == ""? "?" + id : ""), function (body) {
-                $('.x-mask').before($(body).addClass('x-page').attr('id',page));
-                if(id !== ""){
-                    $('#'+page).data('id',id);
-                }
-                var now = app.get(hash, '#'+page);
-                app.current = now;
-                now.show(0);
-                var id = page;
-                if($('#'+id).hasClass('x-cpt-hasBottomBar')){
-                    $('#' + $('#'+id).data('bbar')).show();
-                }else{
-                    $('.x-cpt-bottomBar').hide();
-                }
-                $('.baiduServiceBottomBar').attr('style', 'display: none !important;');
-
-                end();
-            });
-            function end(){
-                util.loadingEnd(false, function(){
-                    $('.x-cpt-menu1').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
-                        $('a', this).addClass('animated rubberBand');
-                    });
-                    $('.x-cpt-menu1').addClass('animated bounceInUp');
-                });
-            }
-        }
-    };
     app.init();
     console.log(app);
-    util.start(init);
+    util.start(_init());
+
+    // 初始化队列
+    function _init(){
+        var list = {
+            firstPage: function(){
+                var hash = App.hash();
+                var page = App.route(hash).page;
+                var id = App.route(hash).id;
+                if(hash == ""){
+                    end();
+                    return false;
+                }
+                $.get(page + (id != ""? "/" + id : ""), function (body) {
+                    $('.x-mask').before($(body).addClass('x-page').attr('id',page));
+                    if(id !== ""){
+                        $('#'+page).data('id',id);
+                    }
+
+                    util.start(util._pageInit(page));
+                    var now = app.get(hash, '#'+page);
+                    app.current = now;
+                    now.show(0);
+                    var id = page;
+                    if($('#'+id).hasClass('x-cpt-hasBottomBar')){
+                        $('#' + $('#'+id).data('bbar')).show();
+                    }else{
+                        $('.x-cpt-bottomBar').hide();
+                    }
+                    $('.baiduServiceBottomBar').attr('style', 'display: none !important;');
+
+                    end();
+                });
+                function end(){
+                    util.loadingEnd(false, function(){
+                        $('.x-cpt-menu1').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+                            $('a', this).addClass('animated rubberBand');
+                        });
+                        $('.x-cpt-menu1').addClass('animated bounceInUp');
+                    });
+                }
+            }
+        };
+        return list;
+    }
 });

@@ -10,17 +10,17 @@ define(function () {
       var $mpMap = $('.x-cpt-map');
       var parseAddr = this.parseAddr;
       var mapInfo = $mpMap.data('info');
-      var address = mapInfo.address;
-      var street = address.street;
-      var addr = parseAddr(address.province) + parseAddr(address.city) + parseAddr(address.regional);
-      var location = mapInfo.point.lng + ',' + mapInfo.point.lat;
+      // var address = mapInfo.address;
+      // var street = address.street;
+      // var addr = parseAddr(address.province) + parseAddr(address.city) + parseAddr(address.regional);
+      // var location = mapInfo.point.lng + ',' + mapInfo.point.lat;
       var width = $(window).width() - 30;
       var dom = [
           '<img class="x-cpt-map-static" src="http://api.map.baidu.com/staticimage',
           '?width=' + (width-2),
           '&height=172',
-          '&center=' + location,
-          '&markers=' + location,
+          '&center=' + mapInfo,
+          '&markers=' + mapInfo,
           '&zoom=14',
           '&markerStyles=-1,',
           'http://s1.map.bdimg.com/components/static/components/elements/lbs-map/images/marker_b6b848e.png,',
@@ -31,10 +31,8 @@ define(function () {
       $mpMap.find('img').replaceWith(dom.join('', ','));
 
       var mapurl = [
-          'http://api.map.baidu.com/marker',
-          '?location=' + mapInfo.point.lat + ',' + mapInfo.point.lng,
-          '&title=' + street,
-          '&content=' + addr,
+          'http://api.map.baidu.com/geocoder',
+          '?address=' + mapInfo,
           '&output=html&src=lbscomponents|lbscomponents'
       ];
       //百度框内不显示地图顶导

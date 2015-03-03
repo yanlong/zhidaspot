@@ -1,4 +1,4 @@
-div.x-cpt-hasBottomBar(data-bbar='bbar1')
+div.x-cpt-hasBottomBar(data-bbar='bbar1' data-tel=app.contact.tel data-qq=app.contact.qq)
 
   - headerTitle = '招商加盟'
   include ../utils/header
@@ -8,6 +8,6 @@ div.x-cpt-hasBottomBar(data-bbar='bbar1')
 
   .x-cpt-article
     h2 合作宗旨
-    p= app.attracting.purpose
+    p!= app.attracting.purpose
     h2 加盟支持
-    p= app.attracting.support
+    p!= app.attracting.support

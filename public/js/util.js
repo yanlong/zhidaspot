@@ -17,6 +17,19 @@ define(function() {
       for(var i in queue){
         queue[i]();
       };
+    },
+    _pageInit: function(page){
+        var list = {
+            getQQwithTel:function(){
+              console.log($('#bbar1').find('[data-for-qq]'));
+              $('#bbar1').find('[data-for-qq]').attr("href", 'http://wpa.qq.com/msgrd?v=3&uin=' + $("#"+page).data("qq") + '&site=qq&menu=yes');
+              $('#bbar1').find('[data-for-tel]').attr("href", 'tel:' + $("#"+page).data("tel"));
+            },
+            test2:function(){
+              
+            }
+        };
+        return list;
     }
   }
 });

@@ -119,10 +119,13 @@ body {
   font-size: 14px;
   line-height: 25px;
 }
-.x-cpt-article ul li{
+.x-cpt-article ul, .x-cpt-article ul>*{
   color: #777;
   font-size: 14px;
   line-height: 25px;
+}
+.x-cpt-article-link{
+  color: #777;
 }
 
 /*cpt-news*/
@@ -164,7 +167,7 @@ body {
 .x-cpt-card1>a>div:nth-child(1)>p, .x-cpt-card1>div:nth-child(1)>p{
   display: -webkit-box;
   width: 100%;
-  height: 54px;
+  max-height: 54px;
   margin-top: 5px;
   font-size: 14px;
   line-height: 18px;
