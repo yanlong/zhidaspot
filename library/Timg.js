@@ -1,3 +1,4 @@
+var fs = require('fs');
 function get(src, quality, width, height) {
     if (!src) {
       return null;
@@ -19,14 +20,19 @@ function md5(text) {
    return crypto.createHash('md5').update(text).digest('hex');
 };
 
-function dumpImage(src, callback) {
+function dumpImage(url, callback) {
    callback = callback || function() {};
-   src = require('../library/Timg.js').get(src);
-   var file = Date.now();
+   var src = require('../library/Timg.js').get(url);
+   var file = md5(url);
+   var srcFile = '../public/img/upload/' + file + '.jpg';
+   var destFile = '/img/upload/' + file + '.jpg';
+   if (fs.existsSync(srcFile) && fs.statSync(srcFile).size > 1e3) {
+      return callback(null, destFile);
+   }
    var req = require('http').get(src, function(res) {
-      res.pipe(require('fs').createWriteStream('../public/img/upload/' + file + '.jpg'));
+      res.pipe(fs.createWriteStream(srcFile));
       res.on('end', function() {
-         callback(null, '/img/upload/' + file + '.jpg');
+         callback(null, destFile);
       });
    });
    req.on('error', callback);
