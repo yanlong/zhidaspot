@@ -1,9 +1,9 @@
 define(function(require) {
 
-    function Page(hash, el) {
+    function Page(hash, el, noHide) {
         this.$el = $(el);
         this.hash = hash;
-        this.$el.hide();
+        !noHide && this.$el.hide();
     }
 
     Page.prototype.show = function(duration) {
@@ -81,8 +81,8 @@ define(function(require) {
         });
     };
 
-    App.prototype.get = function(hash, el) {
-        this.pages[hash] = new Page(hash, el);
+    App.prototype.get = function(hash, el, noHide) {
+        this.pages[hash] = new Page(hash, el, noHide);
         return this.pages[hash];
     }
 
@@ -93,12 +93,36 @@ define(function(require) {
             var hash = App.hash();
             var pages = self.pages;
             if (!hash || !pages[hash]) {
-                // hide current
-                self.current && self.current.hide(duration);
-                self.current = null;
+                if(hash){
+                    var id = App.route(hash).id;
+                    var page = App.route(hash).page;
+                    // util.loading();
+                    $.get(page + (id != ""? "/" + id : ""), function (body) {
+                        $('.x-mask').before($(body).addClass('x-page').attr('id',page));
+                        if(id !== ""){
+                            $('#'+page).data('id',id);
+                        }
+                        $('#'+page).css({display: "block", zIndex: 200});
+                        // util.start(util._pageInit(page));
+                        // util.loadingEnd();
+                        
+                        hideCurrent(hash, page);
+                    });
+                }else{
+                    hideCurrent();
+                }
 
-                $('.x-cpt-bottomBar').hide();
-                
+                function hideCurrent(hash, page){
+                    // hide current
+                    console.log(self.current);
+                    self.current && self.current.hide(duration);
+                    if(hash){
+                        self.get(hash, '#'+page, true);
+                    }
+                    self.current = hash? pages[hash] : null;
+
+                    $('.x-cpt-bottomBar').hide();
+                }
             } else {
                 // hide current 
                 self.current && self.current.hide(duration);
