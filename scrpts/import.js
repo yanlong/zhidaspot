@@ -109,12 +109,12 @@ function importApp(file) {
             }) {
             if (_.isArray(value)) {
                 value.forEach(function(v, index) {
-                    dump(v, 100, 400, 320, function(err, file) {
+                    dump(v, 100, 500, 320, function(err, file) {
                         value[index] = file;
                     })
                 })
             } else {
-                dump(value, 100, 400, 1000, function(err, file) {
+                dump(value, 100, 500, 1000, function(err, file) {
                     obj[key] = file;
                 })
             }
