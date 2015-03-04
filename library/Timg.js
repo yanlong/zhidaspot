@@ -4,7 +4,7 @@ function get(src, quality, width, height) {
       return null;
    }
    quality = quality || 100;
-   width = width || 320;
+   width = width || 640;
    height = height || 640;
    var key = "wisetimgkey";
    var domain = 'http://tc2.baidu-1img.cn/timg?pa';
@@ -20,9 +20,9 @@ function md5(text) {
    return crypto.createHash('md5').update(text).digest('hex');
 };
 
-function dumpImage(url, callback) {
+function dump(url, quality, width, height, callback) {
    callback = callback || function() {};
-   var src = require('../library/Timg.js').get(url);
+   var src = require('../library/Timg.js').get(url, quality, width, height);
    var file = md5(url);
    var srcFile = '../public/img/upload/' + file + '.jpg';
    var destFile = '/img/upload/' + file + '.jpg';
@@ -38,11 +38,13 @@ function dumpImage(url, callback) {
    req.on('error', callback);
 }
 exports.get = get;
-exports.dump = dumpImage;
+exports.dump = dump;
 
 
 if (require.main == module) {
       // test
    var file = 'http://d3.freep.cn/3tb_150301085516jn43545950.jpg';
-   dumpImage(file);
+   dump(file, 100, 50, 50,function (err, file) {
+      console.log(file)
+   });
 }

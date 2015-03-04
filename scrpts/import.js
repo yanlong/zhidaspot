@@ -8,6 +8,7 @@ global.config = require('../conf')
 
 var args = process.argv.slice(2);
 var file = args[0];
+var mode = args[1];
 
 if (fs.statSync(file).isDirectory()) {
     fs.readdirSync(file).forEach(function (name) {
@@ -88,9 +89,9 @@ function importApp(file) {
         // console.log(JSON.stringify(app));
     var App = require('../models/App.js')
     var p = new Parallel();
-    var dump = function(src, callback) {
+    var dump = function(src, quality, width, height, callback) {
         p.task(function(done) {
-            require('../library/Timg.js').dump(src, function(err, file) {
+            require('../library/Timg.js').dump(src, quality, width, height, function(err, file) {
                 console.log(file)
                 callback(err, file);
                 done(err, file);
@@ -108,12 +109,12 @@ function importApp(file) {
             }) {
             if (_.isArray(value)) {
                 value.forEach(function(v, index) {
-                    dump(v, function(err, file) {
+                    dump(v, 100, 400, 320, function(err, file) {
                         value[index] = file;
                     })
                 })
             } else {
-                dump(value, function(err, file) {
+                dump(value, 100, 400, 1000, function(err, file) {
                     obj[key] = file;
                 })
             }
@@ -122,6 +123,9 @@ function importApp(file) {
 
     p.done(function(err, results) {
         if (err) return console.log(err)
+        if (mode == 'image') {
+            return;
+        }
         App(app, function(err, doc) {
             if (err) return console.log(err)
             console.log(util.inspect(doc._doc, {
