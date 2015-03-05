@@ -3,17 +3,18 @@ var util = require('util');
 var _ = require('underscore');
 var fs = require('fs');
 var path = require('path');
-var Parallel = require('../library/Parallel.js');
-global.config = require('../conf')
+var Q = require('q');
+
+var config = require('../conf')
 
 var args = process.argv.slice(2);
 var file = args[0];
 var mode = args[1];
 
 if (fs.statSync(file).isDirectory()) {
-    fs.readdirSync(file).forEach(function (name) {
+    fs.readdirSync(file).forEach(function(name) {
         if (!endsWith(name, '.xlsx')) return;
-        importApp(path.join(file,name));
+        importApp(path.join(file, name));
     })
 } else {
     importApp(file);
@@ -87,18 +88,9 @@ function importApp(file) {
             })
         })
         // console.log(JSON.stringify(app));
-    var App = require('../models/App.js')
-    var p = new Parallel();
-    var dump = function(src, quality, width, height, callback) {
-        p.task(function(done) {
-            require('../library/Timg.js').dump(src, quality, width, height, function(err, file) {
-                console.log(file)
-                callback(err, file);
-                done(err, file);
-            });
-        })
-    }
 
+    dump = require('../library/Timg.js').dump;
+    var tasks = [];
 
     tree(app, function(value, key, obj) {
         if (key in {
@@ -109,30 +101,37 @@ function importApp(file) {
             }) {
             if (_.isArray(value)) {
                 value.forEach(function(v, index) {
-                    dump(v, 100, 500, 320, function(err, file) {
+                    tasks.push(dump(v, 100, 500, 320).then(function(file) {
+                        console.log(file)
                         value[index] = file;
-                    })
+                        return file;
+                    }))
                 })
             } else {
-                dump(value, 100, 500, 1000, function(err, file) {
+                tasks.push(dump(value, 100, 500, 1000).then(function(file) {
+                    console.log(file)
                     obj[key] = file;
-                })
+                    return file;
+                }))
             }
         }
     })
 
-    p.done(function(err, results) {
-        if (err) return console.log(err)
+    Q.all(tasks).then(function(results) {
+        console.log('Image dump done.')
         if (mode == 'image') {
             return;
         }
+        var App = require('../models/App.js')
         App(app, function(err, doc) {
             if (err) return console.log(err)
             console.log(util.inspect(doc._doc, {
                 depth: null
             }))
         });
-    }).run();
+    }).catch(function(err) {
+        console.log(err)
+    })
 }
 
 function parseImages(content) {

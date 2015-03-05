@@ -1,6 +1,8 @@
 var fs = require('fs');
+var Q = require('q');
+
 function get(src, quality, width, height) {
-    if (!src) {
+   if (!src) {
       return null;
    }
    quality = quality || 100;
@@ -20,31 +22,34 @@ function md5(text) {
    return crypto.createHash('md5').update(text).digest('hex');
 };
 
-function dump(url, quality, width, height, callback) {
-   callback = callback || function() {};
+function dump(url, quality, width, height) {
+   var defer = Q.defer();
    var src = require('../library/Timg.js').get(url, quality, width, height);
    var file = md5(url);
    var srcFile = '../public/img/upload/' + file + '.jpg';
    var destFile = '/img/upload/' + file + '.jpg';
    if (fs.existsSync(srcFile) && fs.statSync(srcFile).size > 1e3) {
-      return callback(null, destFile);
-   }
-   var req = require('http').get(src, function(res) {
-      res.pipe(fs.createWriteStream(srcFile));
-      res.on('end', function() {
-         callback(null, destFile);
+      defer.resolve(destFile);
+   } else {
+      var req = require('http').get(src, function(res) {
+         res.pipe(fs.createWriteStream(srcFile));
+         res.on('end', function() {
+            console.log('dump:'+url)
+            defer.resolve(destFile);
+         });
       });
-   });
-   req.on('error', callback);
+      req.on('error', defer.makeNodeResolver());
+   }
+   return defer.promise;
 }
 exports.get = get;
 exports.dump = dump;
 
 
 if (require.main == module) {
-      // test
+   // test
    var file = 'http://d3.freep.cn/3tb_150301085516jn43545950.jpg';
-   dump(file, 100, 50, 50,function (err, file) {
+   dump(file, 100, 50, 50).then(function(file) {
       console.log(file)
    });
 }
