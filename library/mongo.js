@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var db = mongoose.connection;
 var models = require('./models');
+var config = require('../conf');
 
 var begin = new Date();
 var uri = 'mongodb://'+config.app.mongodb.host+'/'+config.app.mongodb.name;

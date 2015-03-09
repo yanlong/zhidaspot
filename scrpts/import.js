@@ -4,30 +4,32 @@ var _ = require('underscore');
 var fs = require('fs');
 var path = require('path');
 var Q = require('q');
-
 var config = require('../conf')
-
 var args = process.argv.slice(2);
 var file = args[0];
 var mode = args[1];
-
-if (fs.statSync(file).isDirectory()) {
-    fs.readdirSync(file).forEach(function(name) {
-        if (!endsWith(name, '.xlsx')) return;
-        importApp(path.join(file, name));
-    })
-} else {
-    importApp(file);
+Q.longStackSupport = true;
+if (file) {
+    importFile(file);
 }
 
-function importApp(file) {
-    var obj = xlsx.parse(file);
+function importFile(file) {
+    if (fs.statSync(file).isDirectory()) {
+        fs.readdirSync(file).forEach(function(name) {
+            if (!endsWith(name, '.xlsx')) return;
+            importApp(path.join(file, name), mode);
+        })
+    } else {
+        importApp(file, mode);
+    }
+}
 
+function parse(file) {
+    var obj = xlsx.parse(file);
     var appData = obj[0]['data'][1];
     var productData = obj[1]['data'].slice(1);
     var newsData = obj[2]['data'].slice(1);
     var promotionData = obj[3]['data'].slice(1);
-
     var app = {};
     var news = [];
     var product = [];
@@ -35,16 +37,13 @@ function importApp(file) {
     var contact = {};
     var promotion = [];
     var attracting = {};
-
     app.news = news;
     app.product = product;
     app.company = company;
     app.contact = contact;
     app.promotion = promotion;
     app.attracting = attracting;
-
     app.style = {};
-
     app.name = company.name = appData[0];
     app.style.bgImage = appData[1];
     company.address = appData[2];
@@ -58,7 +57,6 @@ function importApp(file) {
     company.intro = appData[10];
     company.introImage = appData[11];
     company.images = parseImages(appData[12]);
-
     productData.forEach(function(v) {
         product.push({
             name: v[0],
@@ -68,7 +66,6 @@ function importApp(file) {
             images: parseImages(v[4]),
         })
     })
-
     newsData.forEach(function(v) {
         var postDate = new Date(1900, 0, v[1] - 1);
         news.push({
@@ -88,10 +85,12 @@ function importApp(file) {
             })
         })
         // console.log(JSON.stringify(app));
+    return app;
+}
 
+function dumpImages(app) {
     dump = require('../library/Timg.js').dump;
     var tasks = [];
-
     tree(app, function(value, key, obj) {
         if (key in {
                 images: true,
@@ -116,19 +115,21 @@ function importApp(file) {
             }
         }
     })
+    return Q.all(tasks).then(function() {
+        return app;
+    });
+}
 
-    Q.all(tasks).then(function(results) {
-        console.log('Image dump done.')
+function importApp(file, mode) {
+    mode = mode || 'image';
+    var App = require('../models/App.js')
+    Q(file).then(parse).then(dumpImages).then(function (app) {
         if (mode == 'image') {
-            return;
+            return 'image mode done'
         }
-        var App = require('../models/App.js')
-        App(app, function(err, doc) {
-            if (err) return console.log(err)
-            console.log(util.inspect(doc._doc, {
-                depth: null
-            }))
-        });
+        return Q.nfcall(App,app);
+    }).then(function(app) {
+        console.log(app)
     }).catch(function(err) {
         console.log(err)
     })
@@ -147,7 +148,6 @@ function parseImages(content) {
     return images;
 }
 
-
 function tree(obj, proc) {
     if (typeof obj !== 'object') throw new Error('invalid parameter');
     for (var key in obj) {
@@ -164,4 +164,7 @@ function tree(obj, proc) {
 
 function endsWith(str, suffix) {
     return str.indexOf(suffix, str.length - suffix.length) !== -1;
+}
+if (require.main == module) {
+    importFile('../test/app-data1');
 }
