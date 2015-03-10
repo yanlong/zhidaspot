@@ -57,7 +57,7 @@ require(['util','page'],function(util, App) {
     app.init();
     console.log(app);
     util.start(_init());
-
+    
     // 初始化队列
     function _init(){
         var list = {
@@ -90,11 +90,17 @@ require(['util','page'],function(util, App) {
                     end();
                 });
                 function end(){
+                    // util.loadingEnd(false, function(){
+                    //     $('.x-cpt-menu1').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+                    //         $('a', this).addClass('animated rubberBand');
+                    //     });
+                    //     $('.x-cpt-menu1').addClass('animated bounceInUp');
+                    // });
                     util.loadingEnd(false, function(){
-                        $('.x-cpt-menu1').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
-                            $('a', this).addClass('animated rubberBand');
+                        var blockList = $(".x-cpt-menu2").find("img");
+                        blockList.each(function(e) {
+                            $(blockList.get(e)).addClass("animated flipInX");
                         });
-                        $('.x-cpt-menu1').addClass('animated bounceInUp');
                     });
                 }
             }
