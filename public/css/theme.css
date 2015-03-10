@@ -221,3 +221,20 @@
   -webkit-animation-name: flipInX;
   animation-name: flipInX;
 }
+
+
+
+/*colors*/
+.x-header{
+  background-color: #414473;
+}
+.x-btn-solid{
+  background-color: #414473;
+}
+.x-btn-empt{
+  color: #414473;
+  border-color: #414473;
+}
+.x-cpt-map-route .x-btn{
+  background-color: #242647;
+}
