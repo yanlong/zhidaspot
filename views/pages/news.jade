@@ -7,5 +7,5 @@ div
       li
         a.x-jump(href="#/newsdetail/"+index)
           h2= news.title
-          p!= news.content
+          p!= news.content.replace(/<(?:.|\n)*?>/gm, '')
           .x-cpt-list2-time= news.postDate
