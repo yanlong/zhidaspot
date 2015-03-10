@@ -2,24 +2,69 @@ extends layout
 
 block content
   .x-page-index
-    .x-page-bg
-        img(src=app.style.bgImage, alt="")
-    .x-theme-highlight
+    
     - var menu = [ {name:'公司简介',ename:'Company',url:'#/company'}, {name:'产品中心',ename:'Products',url:'#/products'},{name:'促销信息',ename:'Promotion',url:'#/promotion'},{name:'新闻中心',ename:'News',url:"#/news"},{name:'招商加盟',ename:'Attracting',url:'#/attracting'},{name:'联系我们',ename:'Contact us',url:'#/contact'}]
     - var menuSize = 3
     - var zhidaspot = JSON.stringify(app||{});
     
-    .x-cpt-menu1
+    //- .x-page-bg
+    //-     img(src=app.style.bgImage, alt="")
+    //- .x-theme-highlight
+    //- .x-cpt-menu1
 
-      ul
-        each item,index in menu
-          li
-            a(class='x-jump' href=item.url)
-              span= item.name
-              span= item.ename
+    //-   ul
+    //-     each item,index in menu
+    //-       li
+    //-         a(class='x-jump' href=item.url)
+    //-           span= item.name
+    //-           span= item.ename
 
-          if (index+1) != menu.length && (index+1)%menuSize == 0
-            != '</ul><ul>'
+    //-       if (index+1) != menu.length && (index+1)%menuSize == 0
+    //-         != '</ul><ul>'
+
+    .x-cpt-menu2
+      .box-row2
+        .box-h2
+          img(src='/img/demo-menu2-1.jpg')
+        .box-h1
+          .box-c-l
+            a(href="#/company")
+              i.ic1
+              span 公司介绍
+          .box-c-d
+            a(href="#/promotion")
+              i.ic2
+              span 促销信息
+      .box-row1
+        .box-h1
+          .box-c-d
+            a(href="#/news")
+              i.ic3
+              span 新闻中心
+        .box-h1
+          .box-c-l
+            a(href="#/products")
+              i.ic4
+              span 产品中心
+        .box-h1
+          img(src='/img/demo-menu2-2.jpg')
+      .box-row1
+        .box-h2
+          img(src='/img/demo-menu2-3.jpg')
+        .box-h1
+          .box-c-l
+            a(href="#/attracting")
+              i.ic5
+              span 加盟招商
+      .box-row1
+        .box-h1
+          .box-c-d
+            a(href="#/contact")
+              i.ic6
+              span 联系我们
+        .box-h2
+          img(src='/img/demo-menu2-4.jpg')
+
 
   script.
     window.zhidaspot = !{zhidaspot};
