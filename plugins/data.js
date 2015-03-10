@@ -1,5 +1,7 @@
 var Models = require('../library/models.js');
+var config = require('../conf');
 module.exports = function (req, res, next) {
+    req.query.appid = req.query.appid || config.app.defaultAppid;
     if (req.query.appid) {
         Models.App.findById(req.query.appid).populate('news product promotion contact attracting company').exec(function (err, doc) {
             if (err) return next(err);
