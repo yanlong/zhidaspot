@@ -7,7 +7,10 @@ module.exports = function (req, res, next) {
         Models.App.findById(req.query.appid).populate('news product promotion contact attracting company').exec(function (err, doc) {
             if (err) return next(err);
             req.data = doc;
-            req.data.company.images = genImageUrl(doc._id);
+            req.data.company.images = genImageUrl(doc._id, 3);
+            req.data.product.forEach(function (v) {
+                v.images = genImageUrl(v._id, 1);
+            })
             next();
         })
     } else {
@@ -15,8 +18,8 @@ module.exports = function (req, res, next) {
     }
 }
 
-function genImageUrl(id) {
-    return new SeedRand(id, 40).batch(3,true).map(function (v) {
+function genImageUrl(id, num) {
+    return new SeedRand(id, 40).batch(num,true).map(function (v) {
         return '/img/slider/'+(v+1)+'.jpg';
     });
 }

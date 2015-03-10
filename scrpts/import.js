@@ -25,9 +25,9 @@ function importFile(file) {
 
 
 function importApp(file, mode) {
-    mode = mode || 'image';
+    mode = mode;
     var App = require('../models/App.js')
-    Q(file).then(Base.excel.parse).then(Base.image.dump).then(function (app) {
+    Q.fcall(Base.excel.parse, file).then(Base.image.dump).then(function (app) {
         if (mode == 'image') {
             return 'image mode done'
         }
@@ -41,5 +41,5 @@ function importApp(file, mode) {
 
 
 if (require.main == module) {
-    importFile('../test/app-data1');
+  //  importFile('../test/app-data1');
 }

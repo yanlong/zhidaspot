@@ -41,4 +41,6 @@ if (process.env.NODE_ENV != 'production') {
 	mergeConfig(config, development);
 }
 
+console.log('Loaded config:',process.env.NODE_ENV || 'development')
+
 module.exports = config;
