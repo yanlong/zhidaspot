@@ -8,8 +8,9 @@ module.exports = function (req, res, next) {
             if (err) return next(err);
             req.data = doc;
             req.data.company.images = genImageUrl(doc._id, 3);
-            req.data.product.forEach(function (v) {
-                v.images = genImageUrl(v._id, 1);
+            var images = genImageUrl(doc._id, req.data.product.length);
+            req.data.product.forEach(function (v,index) {
+                v.images = [images[index]];
             })
             next();
         })
