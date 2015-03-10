@@ -102,7 +102,7 @@ define(function(require) {
                         if(id !== ""){
                             $('#'+page).data('id',id);
                         }
-                        $('#'+page).css({display: "block", zIndex: 200});
+                        // $('#'+page).css({display: "block", zIndex: 200});
                         // util.start(util._pageInit(page));
                         // util.loadingEnd();
                         
@@ -120,18 +120,27 @@ define(function(require) {
                         self.get(hash, '#'+page, true);
                     }
                     self.current = hash? pages[hash] : null;
+                    page && pages[hash].show(duration); // show targe
 
-                    $('.x-cpt-bottomBar').hide();
+                    if($('#'+page).hasClass('x-cpt-hasBottomBar')){
+                        $('#' + $('#'+page).data('bbar')).show();
+                    }else{
+                        $('.x-cpt-bottomBar').hide();
+                    }
+
+                    hash || $('.x-cpt-bottomBar').hide();
                 }
             } else {
+                var page = App.route(hash).page;
+
                 // hide current 
                 self.current && self.current.hide(duration);
                 pages[hash].show(duration); // show targe
 
                 //for bottomBar
                 var id = App.route(hash).page;
-                if($('#'+id).hasClass('x-cpt-hasBottomBar')){
-                    $('#' + $('#'+id).data('bbar')).show();
+                if($('#'+page).hasClass('x-cpt-hasBottomBar')){
+                    $('#' + $('#'+page).data('bbar')).show();
                 }else{
                     $('.x-cpt-bottomBar').hide();
                 }

@@ -99,7 +99,7 @@ require(['util','page'],function(util, App) {
                     util.loadingEnd(false, function(){
                         var blockList = $(".x-cpt-menu2").find("img");
                         blockList.each(function(e) {
-                            $(blockList.get(e)).addClass("animated flipInX");
+                            // $(blockList.get(e)).addClass("animated flipInX");
                         });
                     });
                 }
