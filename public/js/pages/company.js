@@ -2,7 +2,6 @@ require(['/widget/slider/idangerous.swiper.min.js', '/widget/bdmap/bdmap.js'], f
     $(function(){
 
       $('.swiper-container, .swiper-slide').css({
-        'display': 'block',
         'width': $(window).width() + 'px',
         'height': '200px'
       });
@@ -10,6 +9,7 @@ require(['/widget/slider/idangerous.swiper.min.js', '/widget/bdmap/bdmap.js'], f
       var mySwiper = $('.swiper-container').swiper({
         //Your options here:
         mode:'horizontal',
+        lazyLoading: true,
         loop: true,
         autoplay: 3000,
         pagination: '.pagination',

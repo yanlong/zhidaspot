@@ -10,9 +10,6 @@ div.x-cpt-hasBottomBar(data-bbar='bbar1' data-tel=app.contact.tel data-qq=app.co
     .x-cpt-slider {
       position: relative;
     }
-    .swiper-container, .swiper-slide{
-      display: none;
-    }
     .swiper-slide h3{
       position: absolute;
       bottom: 0;
@@ -29,7 +26,7 @@ div.x-cpt-hasBottomBar(data-bbar='bbar1' data-tel=app.contact.tel data-qq=app.co
       right: 10px;
       bottom: 10px;
     }
-    .swiper-pagination-switch {
+    .swiper-pagination-bullet {
       display: inline-block;
       margin: 0 3px;
       width: 8px;
@@ -40,7 +37,7 @@ div.x-cpt-hasBottomBar(data-bbar='bbar1' data-tel=app.contact.tel data-qq=app.co
       opacity: 0.8;
       cursor: pointer;
     }
-    .swiper-active-switch {
+    .swiper-pagination-bullet-active {
       background: #fff;
     }
     .swiper-slide img{
@@ -53,7 +50,9 @@ div.x-cpt-hasBottomBar(data-bbar='bbar1' data-tel=app.contact.tel data-qq=app.co
       .swiper-wrapper
         each url in app.company.images
           .swiper-slide
-            img(src=url, alt="")
+
+            img(data-src=url class="swiper-lazy")
+            .swiper-lazy-preloader
             //- p= 222222
             //- h3= '隔热膜'
     .pagination
