@@ -472,16 +472,6 @@ i{
   height: 45px;
   z-index: 300;
 }
-#bbar1{
-  background: #fff;
-  border-top: 1px solid #ddd;
-  line-height: 45px;
-  text-align: center;
-}
-#bbar1 .x-btn-empt{
-  margin-right: 10px;
-}
-
 
 /*cpt-contact*/
 .x-cpt-contact{
@@ -491,9 +481,6 @@ i{
   line-height: 60px;
   text-align: center;
   border-bottom: 1px solid #ddd;
-}
-.x-cpt-contact .x-btn-empt{
-  margin-right: 10px;
 }
 
 /*btn*/
