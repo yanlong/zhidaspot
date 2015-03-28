@@ -1,0 +1,355 @@
+.main{
+  width: 100%;
+}
+.page{
+  width: 100%;
+  position: relative;
+}
+
+
+@media screen and (min-width:640px){
+  
+}
+
+
+
+/* onepage customize */
+.onepage-pagination{
+  right: 40px;
+}
+.onepage-pagination li a{
+  position: relative;
+  padding: 16px;
+  width: 4px;
+  height: 4px;
+}
+.onepage-pagination li a:before{
+  content: '';
+  position: absolute;
+  top: 6px;
+  right: 4px;
+  width: 3px;
+  height: 24px;
+  background: #ccc;
+}
+.onepage-pagination li a.active:before{
+  right: 3px;
+  width: 3px;
+  height: 22px;
+  background: none;
+  border: 1px solid #ccc;
+}
+/* onepage customize end*/
+
+
+[class$=-img]{
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+[class$=-content]{
+  position: relative;
+  max-width: 960px;
+  height: 100%;
+  margin: 0 auto;
+}
+.p1{
+  background: url('/img/home/page1-bg.jpg');
+  background-size: cover;
+}
+.p1-content{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -270px;
+  margin-top: -80px;
+  /*-webkit-transform: translate(-50%,-100%);*/
+  /*transform: translate(-50%,-100%);*/
+  width: 540px;
+  height: 130px;
+}
+
+.p1-title1-img{
+  display: block;
+  margin: 0 auto;
+  width: 260px;
+  height: 50px;
+  background-image: url(/img/home/page1-title.png);
+  background-size: 100%;
+}
+.p1-light-img{
+  margin: 0 auto;
+  width: 280px;
+  height: 30px;
+  background-image: url(/img/home/page1-light.png);
+  background-position: right center;
+}
+.p1-title2-img{
+  margin: 0 auto;
+  width: 540px;
+  height: 40px;
+  background-image: url(/img/home/page1-title2.png);
+  background-position: center;
+}
+
+.p2-bg-img{
+  position: absolute;
+  z-index: -1;
+  bottom: 0;
+  right: 0;
+  width: 80%;
+  height: 100%;
+  max-width: 980px;
+  min-width: 800px;
+  background-image: url(/img/home/page2-bg.jpg);
+  background-size: 90%;
+  background-position: 90% 100%;
+}
+.p2-txt-img{
+  margin-left: 20px;
+  width: 60%;
+  height: 100%;
+  background-image: url(/img/home/page2-txt.png);
+  background-position: 0 30%;
+}
+
+.p3-txt1-img{
+  position: absolute;
+  right: 10px;
+  top: 80px;
+  width: 469px;
+  height: 40px;
+  background-image: url(/img/home/page3-txt1.png);
+}
+.p3-txt2-img{
+  position: absolute;
+  right: 10px;
+  top: 120px;
+  width: 410px;
+  height: 40px;
+  background-image: url(/img/home/page3-txt2.png);
+}
+.p3-txt3-img{
+  position: absolute;
+  right: 10px;
+  top: 200px;
+  width: 513px;
+  height: 77px;
+  background-image: url(/img/home/page3-txt3.png);
+}
+.p3-txt4-img{
+  position: absolute;
+  right: 10px;
+  bottom: 100px;
+  width: 960px;
+  height: 204px;
+  background-image: url(/img/home/page3-txt4.png);
+}
+
+
+
+
+
+.p4-bg-img{
+  position: absolute;
+  /*z-index: 1;*/
+  bottom: -20px;
+  right: 0;
+  width: 800px;
+  height: 601px;
+  background-image: url(/img/home/page4-bg.jpg);
+  background-size: 90%;
+  background-position: 160% 100%;
+}
+.p4-txt-img{
+  margin-left: 20px;
+  width: 608px;
+  height: 100%;
+  background-image: url(/img/home/page4-txt.png);
+  background-position: 0 30%;
+}
+
+
+.p5-txt1-img{
+  position: absolute;
+  right: 10px;
+  top: 80px;
+  width: 468px;
+  height: 35px;
+  background-image: url(/img/home/page5-txt1.png);
+}
+.p5-txt2-img{
+  position: absolute;
+  right: 10px;
+  top: 120px;
+  width: 313px;
+  height: 33px;
+  background-image: url(/img/home/page5-txt2.png);
+}
+.p5-txt3-img{
+  position: absolute;
+  right: 10px;
+  top: 200px;
+  width: 321px;
+  height: 105px;
+  background-image: url(/img/home/page5-txt3.png);
+}
+.p5-txt4-img{
+  position: absolute;
+  left: 10px;
+  bottom: 100px;
+  width: 356px;
+  height: 416px;
+  background-image: url(/img/home/page5-txt4.png);
+}
+
+.p6-txt-img{
+  margin-left: 20px;
+  width: 60%;
+  height: 100%;
+  background-image: url(/img/home/page6-txt.png);
+  background-position: 0 30%;
+}
+
+.footer{
+  width: 100%;
+  height: 50px !important;
+  background-color: #363535;
+  text-align: center;
+  line-height: 50px;
+  font-size: 16px;
+  color: #fff;
+}
+
+/*test area*/
+.p3, .p5{
+  background-color: #363535;
+}
+
+
+@media screen and (max-width:640px){
+  .p1{
+    background-position: center;
+  }
+  .p1-content{
+    margin: 0;
+    -webkit-transform: translate(-50%,-100%);
+    transform: translate(-50%,-100%);
+    width: 100%;
+  }
+
+  .p1-title1-img{
+    width: 160px;
+    height: 36px;
+  }
+  .p1-light-img{
+    width: 180px;
+    height: 10px;
+  }
+  .p1-title2-img{
+    width: 280px;
+    height: 40px;
+  }
+
+  .p-mob-img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url(/img/home/page2-bg2.jpg);
+    background-size: 100%;
+    opacity: .4;
+  }
+  .p2-bg-img{
+    width: 140%;
+    max-width: initial;
+    min-width: initial;
+    background-position: 190% 100%;
+  }
+  .p2-txt-img{
+    width: 90%;
+    background-image: url(/img/home/page2-txt12.png);
+    background-position: 0 20%;
+  }
+
+  .p4-txt-img{
+    width: 90%;
+    background-image: url(/img/home/page4-txt12.png);
+    background-position: 0 20%;
+  }
+  .p4-bg-img{
+    z-index: -1;
+    bottom: 0;
+    right: 0;
+    width: 180%;
+    background-image: url(/img/home/page4-bg.jpg);
+    background-position: 460% 100%;
+  }
+  .p3-content{
+    padding: 30px 35px;
+  }
+  .p3-txt1-img{
+    position: initial;
+    width: 90%;
+  }
+  .p3-txt2-img{
+    position: initial;
+    width: 60%;
+  }
+  .p3-txt3-img{
+    position: initial;
+    width: 100%;
+    height: 160px;
+    margin-top: 20px;
+    background-image: url(/img/home/page3-txt32.png);
+  }
+  .p3-txt4-img{
+    left: 50%;
+    bottom: -50px;
+    width: 80%;
+    height: 420px;
+    -webkit-transform: translate(-50%,0);
+    transform: translate(-50%,0);
+    background-image: url(/img/home/page3-txt42.png);
+  }
+
+  .p5-content{
+    padding: 30px 35px;
+  }
+  .p5-txt1-img{
+    position: initial;
+    width: 90%;
+  }
+  .p5-txt2-img{
+    position: initial;
+    width: 60%;
+  }
+  .p5-txt3-img{
+    position: initial;
+    width: 100%;
+    height: 160px;
+    margin-top: 20px;
+    background-image: url(/img/home/page5-txt32.png);
+  }
+
+  .p5-txt4-img{
+    left: 50%;
+    bottom: -50px;
+    width: 75%;
+    /*height: 50%;*/
+    -webkit-transform: translate(-50%,0);
+    transform: translate(-50%,0);
+  }
+
+  .p6-txt-img{
+    width: 90%;
+    background-image: url(/img/home/page6-txt12.png);
+    background-position: 0 30%;
+  }
+/*  .footer{
+    display: none;
+  }*/
+  .p3, .p5{
+    background-color: #010101;
+  }
+}

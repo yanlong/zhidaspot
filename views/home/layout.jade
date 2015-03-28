@@ -1,0 +1,36 @@
+doctype html
+html
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,initial-scale=1")
+    meta(name="format-detection", content="telephone=no")
+    meta(name="apple-mobile-web-app-status-bar-style", content="white")
+    meta(name="apple-mobile-web-app-capable", content="no")
+
+    title= title
+
+    style 
+        include ../../public/css/home/preview.css
+    link(rel='stylesheet', href='/css/home/style.css')
+  body
+    block content
+
+    include utils/mask
+
+    script.
+      var require = {
+        baseUrl: 'js',
+        paths: {
+        },
+        shim: {
+
+        },
+        map: {
+            '*': 'FIS_MAP_JSON',
+        }
+      };
+
+    script(src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js")
+    script(src='http://apps.bdimg.com/libs/require.js/2.1.11/require.min.js')
+    
+    block js
